@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="소프트웨어 개발에 대한 생각과 소개">
-    <title>wonderland</title>
+    <title>일 잘하는 개발자 되기 · wonderland</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -187,14 +189,23 @@
 </head>
 
     
-        <body class="home-body">
+        <body class="post-body">
     
     
-<header class="header index-header">
+<header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >wonderland</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">일 잘하는 개발자 되기</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>wonderland</a>
 </header>
@@ -215,17 +226,17 @@ height:50vh;
     <!-- 主页  -->
     
     
-    <!-- 文章页  -->
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            wonderland
-            <!-- 文章页  -->
+            일 잘하는 개발자 되기
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
@@ -233,12 +244,44 @@ height:50vh;
             <!-- 主页副标题  -->
             
             
-                There is no end though there is a start in space
-            
-            <!-- 文章页  -->
+            <!-- 404 -->
             
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "개발문화">개발문화</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "커리어">커리어</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2022/05/11</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -322,215 +365,113 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/04/12/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98/" >
-                
-                    <span>개발자 채용 어떻게 해야하나?</span>
-            </a>
-            <div class="abstract-content">
-                ‘개발자 채용 시 기술실력 검증 어떻게 해야 하나’ 라는 주제로 김창준님 강연에 다녀왔다.좋은 기회를 마련해주신 김창준님께 먼저 감사드린다.
-전체적인 요약은 다른 분들이 이미 잘 정리해주셨기에, 이 포스팅에서는 강연 내용을 듣고 채용에 대해 필자가 생각해왔던 부분을 정리해보고자 한다.
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>지난 번에는 <a href="https://wonderer80.github.io/2021/10/13/%EA%B2%BD%EC%9F%81%EB%A0%A5%EC%9E%88%EB%8A%94-%EC%8B%9C%EB%8B%88%EC%96%B4%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C-%EC%84%B1%EC%9E%A5%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/">경쟁력있는 시니어 개발자로 성장하는 방법</a>에 대한 글을 썼다. 그럼 미들 레벨의 개발자나 주니어 레벨의 개발자들은 어떤 역할을 해야 하는걸까? 또 어떻게 해야 일을 잘한다고 평가받을 수 있을까?</p>
+<p>오늘은 필자가 리더의 역할로 살아가면서 팀에 많은 도움이 되는 개발자들은 어떤 개발자이며 어떤 일들을 하는 사람인지에 대해서 이야기해보고자 한다.</p>
+<p>얼마전 <a target="_blank" rel="noopener" href="https://blog.shiren.dev/2022-03-07/">페이스북 개발자의 성과 만들기</a> 라는 제목의 블로그 내용을 보았는데 그 안에는 페이스북에서 어떠한 기준으로 개발자를 평가하는지에 대해 쓰여져 있었다. 페이스북에서 직접적으로 쓰는 용어는 아니라 각색을 했다고 하니 어느 정도 감안해야겠지만 내가 사람들을 바라보는 요소가 매우 비슷하다고 생각하여 인상 깊게 읽었다.</p>
+<p>과거에는 개발자에 대한 평가를 얼마나 짧은 시간 안에 버그없이 많은 기능을 만들어내는지가 주된 평가요소였다고 생각한다. 개발자가 외주 개발자라고 한다면 지금도 어느 정도 유효하다고 생각될지도 모르겠다. 하지만 최근의 조직 문화가 자기 조직화(self-organization) 중심의 문화로 바뀌어가면서 개발자 역시 단순히 요구하는 기능을 만들어주기만 하면 되는 것이 아니라 그 이상의 역할을 기대하게 되었다. 그래서 얼마나 많은 기능을 만들었는지보다 그 기능을 통해서 어떤 성과를 달성했고, 그 성과를 달성하는데 얼만큼의 기여를 했느냐가 더 중요하게 되었다.</p>
+<p>하지만 여전히 기술에 대한 품질이나 협업과 같은 문화적인 측면에서 과소평가 되는 부분들이 많다고 생각한다. 페이스북에서 제시한 내용 중 이미 널리 알려진 프로젝트 성과를 제외한 항목들에 대한 구체적 예시를 우리 조직에서의 사례 중심으로 나열해보겠다.</p>
+<h2 id="엔지니어링"><a href="#엔지니어링" class="headerlink" title="엔지니어링"></a>엔지니어링</h2><h3 id="좋은-품질을-유지하기-위한-활동을-했다"><a href="#좋은-품질을-유지하기-위한-활동을-했다" class="headerlink" title="좋은 품질을 유지하기 위한 활동을 했다"></a>좋은 품질을 유지하기 위한 활동을 했다</h3><ul>
+<li>매주 뉴렐릭에 올라오는 지표들을 정리해서 공유하고 20개의 개선 백로그를 생성해서 관리했다.</li>
+<li>Github Action 에 lint 를 연동하여 룰 위반시 PR이 머지가 되지 않도록 설정했다.</li>
+</ul>
+<h3 id="개발-생산성-향상에-기여를-했다"><a href="#개발-생산성-향상에-기여를-했다" class="headerlink" title="개발 생산성 향상에 기여를 했다"></a>개발 생산성 향상에 기여를 했다</h3><ul>
+<li>개인정보 마스킹 처리 로직을 공통 모듈화 하여 팀에 공유하고 팀원들이 사용할 수 있도록 도왔다.</li>
+<li>ssh tunneling script를 팀 내에 공유해서 팀원들이 손쉽게 사용할 수 있도록 했다.</li>
+<li>로컬 테스트 환경을 Dockerize 해서 팀원들이 손쉽게 테스트 코드를 실행할 수 있도록 했다.</li>
+</ul>
+<h3 id="코드-설계-품질이-떨어지는-레거시-코드를-개선하거나-테스트-코드를-보강하였다"><a href="#코드-설계-품질이-떨어지는-레거시-코드를-개선하거나-테스트-코드를-보강하였다" class="headerlink" title="코드, 설계 품질이 떨어지는 레거시 코드를 개선하거나 테스트 코드를 보강하였다."></a>코드, 설계 품질이 떨어지는 레거시 코드를 개선하거나 테스트 코드를 보강하였다.</h3><ul>
+<li>기존에 존재하지 않던 회원가입 API의 API Spec 문서를 코드를 파악하여 작성했다.</li>
+<li>테스트 코드가 존재하지 않던 회원탈퇴 기능의 테스트 코드를 작성했다.</li>
+</ul>
+<h3 id="안정성-퍼포먼스를-크게-개선했다"><a href="#안정성-퍼포먼스를-크게-개선했다" class="headerlink" title="안정성, 퍼포먼스를 크게 개선했다"></a>안정성, 퍼포먼스를 크게 개선했다</h3><ul>
+<li>장바구니 API 의 성능 개선 작업에 핵심적인 아이디어를 제공하여 기존 대비 5배의 성능 개선을 이끌어 냈다.</li>
+</ul>
+<h2 id="피플-amp-컬쳐"><a href="#피플-amp-컬쳐" class="headerlink" title="피플&amp;컬쳐"></a>피플&amp;컬쳐</h2><h3 id="업무에-도움이-되는-지식이나-정보를-공유했다"><a href="#업무에-도움이-되는-지식이나-정보를-공유했다" class="headerlink" title="업무에 도움이 되는 지식이나 정보를 공유했다"></a>업무에 도움이 되는 지식이나 정보를 공유했다</h3><ul>
+<li>1분기 데브데이에서 ‘일 잘하는 개발자가 되기’ 라는 주제로 발표를 진행했다.</li>
+<li>1월부터 12월까지 총 TIL 을 100건을 작성했고 20건을 밋업시간에 공유했다.</li>
+</ul>
+<h3 id="채용-및-온보딩에-기여했다"><a href="#채용-및-온보딩에-기여했다" class="headerlink" title="채용 및 온보딩에 기여했다"></a>채용 및 온보딩에 기여했다</h3><ul>
+<li>5월에 입사한 아무개님의 온보딩 파트너로 온보딩에 도움을 주었다.</li>
+<li>1월부터 12월까지 총 200건의 채용 서류 검토 작업 및 50건의 인터뷰에 참여했다.</li>
+<li>인터뷰 프로세스 수립 및 평가 기준을 만드는데 기여했다.</li>
+</ul>
+<h3 id="좋은-업무-문화를-만드는데-기여했다"><a href="#좋은-업무-문화를-만드는데-기여했다" class="headerlink" title="좋은 업무 문화를 만드는데 기여했다"></a>좋은 업무 문화를 만드는데 기여했다</h3><ul>
+<li>4월 팀 회식 때 팀원들이 함께 같이 할 게임(구스구스덕)에 대한 아이디어를 내고 진행을 이끌었다.</li>
+<li>팀 내 마니또 프로그램 아이디어를 내고 주도함으로써 팀원들간에 친해지는 시간을 만들었다.</li>
+<li>매주 헬스체크&amp;밋업 시트를 팀 내 공유하고 실행했던 액션아이템을 정리했다.</li>
+<li>밋업 개선 위원회에 참여하여 밋업 프로세스 개선하는데 기여했다.</li>
+</ul>
+<h2 id="리더십"><a href="#리더십" class="headerlink" title="리더십"></a>리더십</h2><h3 id="다른-개발자들의-성장과-동기부여에-기여했다"><a href="#다른-개발자들의-성장과-동기부여에-기여했다" class="headerlink" title="다른 개발자들의 성장과 동기부여에 기여했다"></a>다른 개발자들의 성장과 동기부여에 기여했다</h3><ul>
+<li>1월부터 6월까지 매달 1on1을 6명의 구성원들에게 진행했다.(총 36회)</li>
+<li>아무개님의 멘토를 맡아서 1월부터 6월까지 12회의 멘토링 시간을 가졌다.</li>
+<li>1월부터 6월까지 도메인 시니어들을 대상으로 총 24회의 리더십 트레이닝을 진행했다.</li>
+</ul>
+<h3 id="기술에-대한-가이드를-만드는데-기여했다"><a href="#기술에-대한-가이드를-만드는데-기여했다" class="headerlink" title="기술에 대한 가이드를 만드는데 기여했다"></a>기술에 대한 가이드를 만드는데 기여했다</h3><ul>
+<li>정기 컨벤션 논의 미팅에서 5건의 아이디어를 제시했고 3건의 아이디어가 정식 컨벤션으로 채택되었다.</li>
+<li>정기 컨벤션 논의 미팅 내용에서 결정된 컨벤션 내용을 공식 문서화 하여 반영했다.</li>
+<li>REST API 설계 가이드를 작성하고 개발팀 전체에 공유하였다.</li>
+<li>ERD 작성 가이드를 만들고 공유하여 구성원들이 ERD를 작성할 떄 참고할 수 있도록 제공했다.</li>
+</ul>
+<p>여기에서 중요한 부분 중 하나는 팀 내에서 맡겨진 업무를 진행하면서 이루어진 부분들은 프로젝트 성과로 다뤄지고 자발적인 선택에 의해서 이루어진 것들이 그 외의 성과로 다뤄져야 한다고 생각한다.</p>
+<p>예를 들면 내가 팀 내에서 간편결제 기능을 만들기로 했고 그 과정에서 결제 기능 관련된 부분을 리팩토링을 하고 간편결제 기능에 대한 테스트 코드를 붙였다면 그건 과제를 진행하면서 요구되는 최소한의 품질 수준을 달성하기 위한 업무의 과정이지 엔지니어링 성과라고 보기 어렵다. 반면 내게 맡겨진 업무는 아니지만 우연히 어떤 버그를 발견하였고 버그 수정과 더불어 테스트 코드를 보완했다면 그건 엔지니어링 성과라고 볼 수 있다.</p>
+<p>위의 예시들이 모두 동일한 임팩트를 가지고 있지는 않을 것이다. 마찬가지로 모든 개발자에게 동등한 조건을 요구할 수도 없다. 주니어 개발자들은 기술적 경험이 부족한만큼 컨벤션 논의나 성능 개선 등에는 기여하기 어려울 수 있지만 팀 내 화합을 위한 아이디어나 진행, 기술 문서 정리와 같은 것들은 기여할 수 있다. 시니어들 역시 그런 부분에 기여할 수 있겠지만 그것만 가지고는 부족할 것이다. 기술 공유나 멘토링, 가이드와 같은 좀 더 임팩트가 큰 성과들을 만들어내야할 것이다. </p>
+<p>다시 일 잘하는 개발자로 돌아가보자. 내가 얘기하고 싶은 것은 ‘뛰어난 커뮤니케이션 능력, 문제 해결 능력을 갖춰야 한다.’ 이런 것이 아니다. 결국 내가 어떤 것을 해냈고 어떤 기여를 했는가이다. 아무리 내가 어떤 능력이 뛰어나다고 해도 그 능력이 발휘되어 어떤 결과로 이어지지 않으면 그건 그 능력이 없는 것과 동일하다.</p>
+<p>내가 일하고 싶은 개발자, 그리고 일 잘하는 개발자들은 단순히 맡겨진 기능을 빨리 개발하는 개발자가 아니었다. 개인의 입장이 아니라 팀과 조직의 입장에서 자발적으로 다양한 부분에 주도적으로 기여하는 사람들이었다. 여러분이 조직에서 기여한 것들을 위의 항목들의 예시와 비교해가며 생각해보자. 나는 얼마나 다양한 것들에 기여하고 있는가? 프로젝트 성과 하나만을 바라보고 있진 않은가? 반대로 내 주변에 함께 일하고 싶은 개발자, 일 잘하는 개발자들은 어떤 것들을 해왔는지 생각해보자.</p>
 
-이호성님 브런치
-창천향로님의 칼럼
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="previous">
+          
+              <div class="prevSlogan">Previous Post</div>
+              <a href= "/2022/04/13/%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0-%EA%B0%9C%EC%84%A0%ED%95%B4%EB%82%98%EA%B0%80%EA%B8%B0/" title= 코드 리뷰 개선해나기기 >
+                  <div class="prevTitle">코드 리뷰 개선해나기기</div>
+              </a>
+          
+        </li>
+        <li class="next">
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-어떤 사람을 뽑을 것인가?필자도 평소에 ‘어떤 사람을 뽑아야하는가’에 대한 고민이 많이 있었는데, 그 이전에 ‘왜 사람을 뽑는가?’ 와 관련이 있을 것 같다. 대부분의 회사가 개발자를 뽑는 이유는 ‘할일은 많...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/12</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+<!-- City版安装代码已完成 -->
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = "https://wonderer80.github.io/2022/05/11/%EC%9D%BC-%EC%9E%98%ED%95%98%EB%8A%94-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EB%90%98%EA%B8%B0/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "일 잘하는 개발자 되기"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://wonderland-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
     
-</div>
-                
-            </div>
-        </article>
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/04/10/%ED%8B%B0%EB%B9%84%EB%A5%BC-%EB%B3%B4%EB%A9%B0-%EC%BD%94%EB%94%A9%ED%95%98%EB%A9%B4-%EC%95%88%EB%90%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >
-                
-                    <span>티비를 보며 코딩하면 안되는 이유</span>
-            </a>
-            <div class="abstract-content">
-                게임업계나 스타트업에서 일을 하다보면 상당히 자유로운 분위기에서 일을 하는 모습을 볼 수 있다. 편하고 자유로운 환경은 스트레스를 줄여주고 자유로운 의사소통을 나눌 수 있으며 자율적인 분위기를 조성하는데 도움이 된다. 그런 가운데에는 음악을 들으며 코딩을 하거나 티비나 영화 등을 관람하며 작업하는 경우도 많이 보아왔다. 오늘은 티비를 보며 코딩을 하는 것에 대해 생각했던 개인적 견해를 밝혀보고자 한다.
-필자의 경우는 주변소음을 차단하기 위한 정도로 가사가 없는 음악을 듣거나 아무 것도 듣지않는 경우가 많은데 그게 가장 개발에 ...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/10</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/04/04/%EC%B4%88%EB%B3%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%97%86%EC%9D%B4-TDD-%EB%B0%B0%EC%9A%B0%EA%B8%B0/" >
-                
-                    <span>초보를 위한 테스트 코드 없이 TDD 배우기</span>
-            </a>
-            <div class="abstract-content">
-                이전 포스팅을 통해서 TDD를 배우기 왜 어려운지에 대한 이야기를 하였다. 그럼 TDD를 위한 기반지식이 없는 상태에서 TDD를 배우려면 어떻게 해야할까? 당연하겠지만 정석은 차근차근 필요한 지식들을 공부해나가는 것이다. 테스트 하는 법, 테스트 코드를 작성하는 법, 리팩토링을 하나씩 수련해나가는 것이다. 하지만 하나하나가 만만치가 않다. 나는 언제야 TDD를 해볼 수 있는 것일까?
-그래서 이번 포스팅에서는 정석적인 학습법이 아닌 내가 시도한 사파의 수련법을 공유해보고자 한다. 이로인한 주화입마는 책임지지 않으니 판단은 각자에...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/04</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "TDD">TDD</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/04/03/%EB%8B%B9%EC%8B%A0%EC%9D%B4-TDD%EC%97%90-%EC%8B%A4%ED%8C%A8%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >
-                
-                    <span>당신이 TDD에 실패하는 이유</span>
-            </a>
-            <div class="abstract-content">
-                TDD가 나온지 많은 세월이 지났지만 TDD를 잘알고 활용하는 개발자는 흔치 않다. 그럼에도 잊을만하면 어디선가 한번씩 언급되는 TDD이기에 자세히는 몰라도 관심을 가지고 있는 개발자는 많다.
-어떤 개발자는 테스트 코드를 작성하는게 TDD가 아니냐고 하는 개발자도 있었다. TDD라는게 뭔가 자동화 테스트와 관련이 있는 것 같은데 자세히는 모르겠고, 막연한 뭉개구름 같은 감각적 느낌으로만 알고 있는 개발자가 흔하게 있을 정도로 TDD는 그 이름에 비해 잘 알고 있는 사람은 별로 없다.
-나 역시 처음 TDD를 배워보겠다고 TDDB...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/03</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "TDD">TDD</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/29/%EA%B8%B0%EC%88%A0-%EA%B8%B0%EB%B0%98-%ED%9A%8C%EC%82%AC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >
-                
-                    <span>기술 기반 회사란 무엇일까?</span>
-            </a>
-            <div class="abstract-content">
-                예전에 다니던 직장에서 ‘우리 회사는 기술 기반 회사인가?’ 라는 주제로 엔지니어 그룹에서 토론을 한적이 있었다.
-그렇다고 하는 사람도 있었고, 아니다라고 하는 사람도 있었는데 왜 그 토론을 주제로 삼았는지는 기억이 안나지만 어느 쪽이든 기술 기반 회사의 회사에서 일하고 싶다는 마음은 같았던 것 같다.
-그렇게 몇 년이 지나 그 직장을 그만두고 회사를 알아보러 이곳 저곳에 면접을 보러 다니는 와중에 8년차 서비스를 하고 있는 유명 스타트업 E사의 대표님과의 최종 면접이 있었다. 왜 이전 직장을 나왔냐는 단골 질문에 기술적인 성장...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/29</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/">&amp;#60; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-    
+    <!-- 评论 -->
 </main>
-            <!-- profile -->
-            
-            <div class="profile">
-    <img class="profile-avatar" src= /avatar/wonderer.jpeg >
-    <div class="profile-name">wonderer</div>
-    
-    <div class="profile-signature">
-        호기심으로 가득한 사람
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
-            
-                <a href="mailto:wonderv@gmail.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-            
-                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
-            
-        
-    
 
-    </div>
-    
-    
-    
-</div>
+            <!-- profile -->
             
         </div>
         <footer class="footer footer-unloaded">
@@ -594,6 +535,24 @@ height:50vh;
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81"><span class="toc-number">1.</span> <span class="toc-text">엔지니어링</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A2%8B%EC%9D%80-%ED%92%88%EC%A7%88%EC%9D%84-%EC%9C%A0%EC%A7%80%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-%ED%99%9C%EB%8F%99%EC%9D%84-%ED%96%88%EB%8B%A4"><span class="toc-number">1.1.</span> <span class="toc-text">좋은 품질을 유지하기 위한 활동을 했다</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EA%B0%9C%EB%B0%9C-%EC%83%9D%EC%82%B0%EC%84%B1-%ED%96%A5%EC%83%81%EC%97%90-%EA%B8%B0%EC%97%AC%EB%A5%BC-%ED%96%88%EB%8B%A4"><span class="toc-number">1.2.</span> <span class="toc-text">개발 생산성 향상에 기여를 했다</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%BD%94%EB%93%9C-%EC%84%A4%EA%B3%84-%ED%92%88%EC%A7%88%EC%9D%B4-%EB%96%A8%EC%96%B4%EC%A7%80%EB%8A%94-%EB%A0%88%EA%B1%B0%EC%8B%9C-%EC%BD%94%EB%93%9C%EB%A5%BC-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B1%B0%EB%82%98-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EB%B3%B4%EA%B0%95%ED%95%98%EC%98%80%EB%8B%A4"><span class="toc-number">1.3.</span> <span class="toc-text">코드, 설계 품질이 떨어지는 레거시 코드를 개선하거나 테스트 코드를 보강하였다.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%95%88%EC%A0%95%EC%84%B1-%ED%8D%BC%ED%8F%AC%EB%A8%BC%EC%8A%A4%EB%A5%BC-%ED%81%AC%EA%B2%8C-%EA%B0%9C%EC%84%A0%ED%96%88%EB%8B%A4"><span class="toc-number">1.4.</span> <span class="toc-text">안정성, 퍼포먼스를 크게 개선했다</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%94%BC%ED%94%8C-amp-%EC%BB%AC%EC%B3%90"><span class="toc-number">2.</span> <span class="toc-text">피플&amp;컬쳐</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%97%85%EB%AC%B4%EC%97%90-%EB%8F%84%EC%9B%80%EC%9D%B4-%EB%90%98%EB%8A%94-%EC%A7%80%EC%8B%9D%EC%9D%B4%EB%82%98-%EC%A0%95%EB%B3%B4%EB%A5%BC-%EA%B3%B5%EC%9C%A0%ED%96%88%EB%8B%A4"><span class="toc-number">2.1.</span> <span class="toc-text">업무에 도움이 되는 지식이나 정보를 공유했다</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%B1%84%EC%9A%A9-%EB%B0%8F-%EC%98%A8%EB%B3%B4%EB%94%A9%EC%97%90-%EA%B8%B0%EC%97%AC%ED%96%88%EB%8B%A4"><span class="toc-number">2.2.</span> <span class="toc-text">채용 및 온보딩에 기여했다</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A2%8B%EC%9D%80-%EC%97%85%EB%AC%B4-%EB%AC%B8%ED%99%94%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EA%B8%B0%EC%97%AC%ED%96%88%EB%8B%A4"><span class="toc-number">2.3.</span> <span class="toc-text">좋은 업무 문화를 만드는데 기여했다</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%A6%AC%EB%8D%94%EC%8B%AD"><span class="toc-number">3.</span> <span class="toc-text">리더십</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EB%8B%A4%EB%A5%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%93%A4%EC%9D%98-%EC%84%B1%EC%9E%A5%EA%B3%BC-%EB%8F%99%EA%B8%B0%EB%B6%80%EC%97%AC%EC%97%90-%EA%B8%B0%EC%97%AC%ED%96%88%EB%8B%A4"><span class="toc-number">3.1.</span> <span class="toc-text">다른 개발자들의 성장과 동기부여에 기여했다</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EA%B8%B0%EC%88%A0%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EA%B8%B0%EC%97%AC%ED%96%88%EB%8B%A4"><span class="toc-number">3.2.</span> <span class="toc-text">기술에 대한 가이드를 만드는데 기여했다</span></a></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -943,6 +902,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
