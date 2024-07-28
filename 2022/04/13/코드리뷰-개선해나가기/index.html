@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <meta name="description" content="소프트웨어 개발에 대한 생각과 소개">
+    <title>코드 리뷰 개선해나기기 · wonderland</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        
+    <link rel="icon" href= /assets/favicon.ico>
+    <script>
+        (function (w) {
+            "use strict";
+            // rel=preload support test
+            if (!w.loadCSS) {
+                w.loadCSS = function () { };
+            }
+            // define on the loadCSS obj
+            var rp = loadCSS.relpreload = {};
+            // rel=preload feature support test
+            // runs once and returns a function for compat purposes
+            rp.support = (function () {
+                var ret;
+                try {
+                    ret = w.document.createElement("link").relList.supports("preload");
+                } catch (e) {
+                    ret = false;
+                }
+                return function () {
+                    return ret;
+                };
+            })();
+
+            // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+            // then change that media back to its intended value on load
+            rp.bindMediaToggle = function (link) {
+                // remember existing media attr for ultimate state, or default to 'all'
+                var finalMedia = link.media || "all";
+
+                function enableStylesheet() {
+                    link.media = finalMedia;
+                }
+
+                // bind load handlers to enable media
+                if (link.addEventListener) {
+                    link.addEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.attachEvent("onload", enableStylesheet);
+                }
+
+                // Set rel and non-applicable media type to start an async request
+                // note: timeout allows this to happen async to let rendering continue in IE
+                setTimeout(function () {
+                    link.rel = "stylesheet";
+                    link.media = "only x";
+                });
+                // also enable media after 3 seconds,
+                // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                setTimeout(enableStylesheet, 3000);
+            };
+
+            // loop through link elements in DOM
+            rp.poly = function () {
+                // double check this to prevent external calls from running
+                if (rp.support()) {
+                    return;
+                }
+                var links = w.document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    // qualify links to those with rel=preload and as=style attrs
+                    if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                        // prevent rerunning on link
+                        link.setAttribute("data-loadcss", true);
+                        // bind listeners to toggle media back
+                        rp.bindMediaToggle(link);
+                    }
+                }
+            };
+
+            // if unsupported, run the polyfill
+            if (!rp.support()) {
+                // run once at least
+                rp.poly();
+
+                // rerun poly on an interval until onload
+                var run = w.setInterval(rp.poly, 500);
+                if (w.addEventListener) {
+                    w.addEventListener("load", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                } else if (w.attachEvent) {
+                    w.attachEvent("onload", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                }
+            }
+            // commonjs
+            if (typeof exports !== "undefined") {
+                exports.loadCSS = loadCSS;
+            }
+            else {
+                w.loadCSS = loadCSS;
+            }
+        }(typeof global !== "undefined" ? global : this));
+    </script>
+    <script src="//code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-116555605-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="wonderland" type="application/atom+xml">
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >wonderland</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">코드 리뷰 개선해나기기</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>wonderland</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            코드 리뷰 개선해나기기
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "개발문화">개발문화</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "코드리뷰">코드리뷰</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2022/04/13</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
+        
+    </div>
+</div>
+        <script>
+  // load webfont-loader async, and add callback function
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+  
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+      if (postIntroTags) {
+        postIntroTags.classList.add('post-fade-in');
+      }
+      if (postIntroMeat) {
+        postIntroMeat.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>지난 번 글에 이어 이번 글에서는 필자가 속한 조직에서 필자가 입사했을 때 당시의 시점에서부터 현재까지 코드 리뷰 과정에서의 고민과 변화들을 이야기해보도록 하겠다.</p>
+<p>코드 리뷰를 처음 도입하는 회사들은 Github의 PR(Pull Request) 리뷰에서 시작하게 되는 경우가 많다. 하지만 처음에는 어떤 식으로 리뷰를 해야하는지 잘 모르기 때문에 로직적으로 결함이 있는지, 컨벤션은 준수되었는지와 같은 코드 스타일을 주로 본다. 필자가 입사 했을 때 당시에도 주로 코드 스타일이나 로직에 대한 부분의 피드백이 중점적이었다. 그리고 테스트 코드를 도입한지 얼마 안된 상황이었다.</p>
+<p><img src="/images/code_review_pyramid_kor.png" alt="code review pyramid" title="리뷰를 개선시켜나가는 하나의 기준점으로 잡아보자"></p>
+<p>백엔드 개발자들끼리 비교적 활발하게 리뷰를 해주는 상황이긴 했지만 각자가 다른 팀에서 바쁘게 일을 하고 있는 상황이다보니 해당 PR의 목적을 이해하기보단 코드 자체에 집중할 수밖에 없는 상황이었다. 그래도 다행이었던 점은 회사에서 오랫동안 근무하며 넓은 범위를 이해하고 있는 개발자들이 많이 있었다는 점이었다. 그들은 별도의 설명이 없어도 코드의 히스토리를 잘 알고 있었기에 자세한 설명이 없어도 비교적 수월하게 리뷰를 진행할 수 있는 장점이 있었다.</p>
+<p>하지만 최근에 입사한 분들은 코드만 가지고 피드백 할 수 있는 부분에 한계가 있었으며 필자처럼 Python/Django 개발 경험이 없던 개발자 입장에서는 더더욱 기여를 할 수 있는 부분이 거의 없었다. 또한 과거에 필자가 코드 리뷰를 하면서 느꼈던 큰 한계점 중에 하나가 있었는데 바로 설계에 대한 부분이었다. 데이터 모델링이나 API Spec 설계 같은 경우 코드 전체적으로 중요한 영향을 끼치며 한번 결정되면 추후에 바꾸기가 쉽지 않다. 그럼에도 불구하고 코드 리뷰 단계에서 관련하여 개선 피드백이 나와도 반영하기가 쉽지 않다. 왜냐하면 설계가 바뀌면 이미 작성된 코드의 상당 부분을 재작성해야하는 경우가 생기며 리뷰를 받는 시점에서는 이미 릴리즈를 앞둔 경우가 많기 때문이다. 누군가는 리뷰 과정에서 개선점이 발견되면 당연히 수정되어야 하는 것 아니냐고 생각할 수도 있다. 사실 필자도 그렇게 생각했다. 하지만 릴리즈 시점은 여러 이해가 얽혀있는 경우가 많으며, 개발자 개인이 그런 압박을 견디면서 릴리즈를 미루기는 쉽지가 않다. 실제로 많은 부분이 수정을 해야하기 때문에 비효율이 발생된다. 이런 상황이 반복되다보면 오히려 거대한 레거시가 금방 쌓이게 되고 피드백은 단순하고 큰 가치 없는 내용이 주를 이루게 된다. </p>
+<h2 id="테크스펙-도입"><a href="#테크스펙-도입" class="headerlink" title="테크스펙 도입"></a>테크스펙 도입</h2><p>이런 여러가지 문제를 해소하기 위한 방안으로 코딩을 하기 전에 테크 스펙을 작성하고 리뷰를 하는 과정을 두게 되었다. 테크 스펙의 내용은 극히 일부의 내용을 제외하고는 기술 독립적이며, 목적이나 의도, 기획 내용 등이 같이 기재되어 있기 때문에 개발자라면 누구나 이해하고 리뷰할 수 있다. 또한 개발의 초기 시점에 진행되기 때문에 설계가 변경되더라도 비용이 적게 든다. 오히려 코드가 없기 떄문에 설계나 의도 그 자체에 더 집중할 수 있게 된다. 이것을 통해서 어떤 문제를 해결하고자 했는지 구성원들의 공감대가 있었기 때문에 어찌보면 번거로울수도 있는 과정이 하나 더 생겼음에도 불구하고 모두가 열심히 참여해주었다.</p>
+<p><img src="/images/tech_spec.png" alt="테크 스펙" title="설계가 잘되면 그 뒤 개발은 쉽다"></p>
+<h2 id="명시적-리뷰어"><a href="#명시적-리뷰어" class="headerlink" title="명시적 리뷰어"></a>명시적 리뷰어</h2><p>초기에는 백엔드 개발자가 몇명 없었고 동시에 진행되는 업무도 많지 않았기 때문에 별도의 리뷰어를 지정하지 않아도 어느 정도 리뷰가 진행되었지만 인원이 늘어나기 시작하면서 리뷰가 밀리거나 방치되는 상황이 발생되었다. 각자의 업무도 바쁘지만 생성되는 PR도 많아지고 명시적으로 리뷰어를 지정하지 않다보니 하는 사람만 하거나 리뷰가 밀리는 상황이 발생됐다. 리뷰의 중요성에 대해 설명을 하는 것만으로는 부족했다. 명시적으로 리뷰어를 지정하는 것이 좋겠다는 판단이 들었지만 어떻게 지정해야할지 고민이었다. 그 와중에 팀원 분의 아이디어로 리뷰 마니또 라는 제도를 시작하게 되었다. 리뷰 마니또는 본인이 속하지 않은 도메인의 개발자 중에서 랜덤으로 뽑게 되는데 한달동안 본인의 리뷰 요청을 전담해주게 된다. 리뷰는 기본적으로 자신의 속한 도메인 내의 개발자 1명 이상과 리뷰 마니또가 해주게 되는데 리뷰 마니또는 본인이 속한 도메인이 아니기 때문에 이해하기 어려운 코드나 문서를 더 잘 인지하고 피드백할 수 있게 된다.</p>
+<p><img src="/images/review_manito.png" alt="리뷰 마니또" title="맘편히 리뷰 요청할 수 있는 동료"></p>
+<h2 id="피드백-중요도-표기"><a href="#피드백-중요도-표기" class="headerlink" title="피드백 중요도 표기"></a>피드백 중요도 표기</h2><p>코드 리뷰를 진행할 때 남기는 댓글이 모호하게 느껴질 때가 있다고 생각이 드는 경우가 많았다. 그냥 참고하라는 이야기인지, 꼭 반영이 되었으면 하는 내용인지, 리뷰를 하는 사람이 어느 정도의 중요성을 가지고 말했는지 애매할 때가 있다. 리뷰를 하는 과정에서 조심스럽게 전달하다보니 그런 경우가 생기는 것이겠지만 한편으로는 비효율적으로 느껴질 때도 많았다. 이런 부분을 좀 더 명확하게 하고 싶어서 중요도를 달 수 있도록 정의했다. github saved reply 기능을 이용하여 리뷰하는 과정에서 편리하게 중요도를 선택해서 남길 수 있게 하였다. L1에서 L3까지는 반드시 합의를 통해서 resolve가 되어야 하며 L4, L5나 반드시 반영하지 않아도 머지할 수 있도록 구분해두었다.</p>
+<p><img src="/images/review_comment.png" alt="Code Review시 말머리 가이드" title="Level별로 중요도가 나눠진다"></p>
+<h2 id="JIRA-Workflow와-통합"><a href="#JIRA-Workflow와-통합" class="headerlink" title="JIRA Workflow와 통합"></a>JIRA Workflow와 통합</h2><p>리뷰 요청 방식도 여러번 개선되었다. 요청 시 필요한 정보들이 추가되고 슬랙 워크플로우 기능을 이용해서 템플릿을 제공했다. 근데 요청되는 리뷰가 많아지니 슬랙으로는 내가 요청 받은 리뷰를 확인하는 것이 점점 어려워졌다. 업무에서 JIRA를 활용하고 있으니 자연스럽게 workflow를 연동하자는 의견이 나왔다. 현재는 리뷰 요청하는 과정을 JIRA의 워크플로우와 통합하여 JIRA에 리뷰 관련 정보를 기입하고 상태를 변경하면 자동으로 슬랙으로 발송된다. 또한 리뷰용 지라 대시보드 구성을 통해서 현재 진행되고 있는 전체 리뷰 상황과 나에게 할당된 리뷰도 볼 수 있게 되었다.</p>
+<p><img src="/images/review_jira.png" alt="JIRA와 리뷰 연동" title="지라이슈가 리뷰상태가 되면 자동으로 슬랙이 발송된다"></p>
+<h2 id="지속적인-개선이-중요하다"><a href="#지속적인-개선이-중요하다" class="headerlink" title="지속적인 개선이 중요하다"></a>지속적인 개선이 중요하다</h2><p>그 외에도 자세하게 기술하지 않은 수많은 개선사항이 있었고 필자는 여전히 개선해야할 부분이 있다고 생각한다. 필자가 이 글에서 결국 전달하고 싶었던 부분은 우리가 현재 어떤 것을 하고 있는가를 얘기하는 것이 아니다. 오히려 맹목적으로 다른 조직이 하는 것을 그대로 따라하는 것을 경계하라고 하고 싶다. 핵심은 우리가 수행하고 있는 프로세스의 목적을 이해하고 지속적으로 개선해나가는 과정이다. 또한 그러한 과정은 특정 한두명이 하는 것이 아니라 구성원들의 참여로 이루어지도록 해야한다. 리더는 구성원들이 이런 의견을 자유롭게 내고 실행할 수 있는 환경을 마련해주는 역할을 해야하고, 혹시나 원래의 목적을 잃고 관습적으로 실행하고 있는 부분은 없는지 살펴야 한다.</p>
+<p>다른 조직들의 리뷰 문화나 프로세스를 보면 우리가 하는 것은 보잘것없고 부족해보일 수도 있다. 하지만 정말 부끄러워해야하는 것은 그저 원래 해왔으니까, 남들도 다 하니까 따라 하는 모습일 것이다. 특정 한명의 이상과 역량이 아무리 높을지라도 결국 조직은 구성원들의 평균 수준에 수렴한다. 변화가 한순간에 이루어질 것이라고 기대하는 것은 환상이다. 구성원들과 함께 걸어가며 성장해야 진정한 변화를 이룰 수 있다. 이 글을 통해 코드 리뷰와 관련해서 우리가 지금 관습적으로 하고 있는 것은 없는지 한번 살펴보고, 아이디어를 얻어 가셨으면 하는 바람이다. </p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="previous">
+          
+              <div class="prevSlogan">Previous Post</div>
+              <a href= "/2022/02/09/%EC%9A%B0%EB%A6%B0-%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%9E%98%ED%95%98%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C/" title= 우린 코드리뷰 잘하고 있을까? >
+                  <div class="prevTitle">우린 코드리뷰 잘하고 있을까?</div>
+              </a>
+          
+        </li>
+        <li class="next">
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = "https://wonderer80.github.io/2022/04/13/%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0-%EA%B0%9C%EC%84%A0%ED%95%B4%EB%82%98%EA%B0%80%EA%B8%B0/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "코드 리뷰 개선해나기기"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://wonderland-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:wonderv@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%85%8C%ED%81%AC%EC%8A%A4%ED%8E%99-%EB%8F%84%EC%9E%85"><span class="toc-number">1.</span> <span class="toc-text">테크스펙 도입</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%AA%85%EC%8B%9C%EC%A0%81-%EB%A6%AC%EB%B7%B0%EC%96%B4"><span class="toc-number">2.</span> <span class="toc-text">명시적 리뷰어</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%94%BC%EB%93%9C%EB%B0%B1-%EC%A4%91%EC%9A%94%EB%8F%84-%ED%91%9C%EA%B8%B0"><span class="toc-number">3.</span> <span class="toc-text">피드백 중요도 표기</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JIRA-Workflow%EC%99%80-%ED%86%B5%ED%95%A9"><span class="toc-number">4.</span> <span class="toc-text">JIRA Workflow와 통합</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%A7%80%EC%86%8D%EC%A0%81%EC%9D%B8-%EA%B0%9C%EC%84%A0%EC%9D%B4-%EC%A4%91%EC%9A%94%ED%95%98%EB%8B%A4"><span class="toc-number">5.</span> <span class="toc-text">지속적인 개선이 중요하다</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 14 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2022 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/13</span><a class="archive-post-title" href= "/2022/04/13/%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0-%EA%B0%9C%EC%84%A0%ED%95%B4%EB%82%98%EA%B0%80%EA%B8%B0/" >코드 리뷰 개선해나기기</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2022/02/09/%EC%9A%B0%EB%A6%B0-%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%9E%98%ED%95%98%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C/" >우린 코드리뷰 잘하고 있을까?</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2021/11/10/%EC%8B%9C%EB%8B%88%EC%96%B4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EC%84%A0%ED%83%9D%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%A6%AC%EB%8D%94-%ED%8F%AC%EC%A7%80%EC%85%98/" >시니어 개발자가 선택할 수 있는 리더 포지션</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2021/10/13/%EA%B2%BD%EC%9F%81%EB%A0%A5%EC%9E%88%EB%8A%94-%EC%8B%9C%EB%8B%88%EC%96%B4%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C-%EC%84%B1%EC%9E%A5%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/" >경쟁력있는 시니어 개발자로 성장하는 방법</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/14</span><a class="archive-post-title" href= "/2021/07/14/%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%EC%9D%98-%EC%83%9D%EC%82%B0%EC%84%B1%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B8%A1%EC%A0%95%ED%95%98%EB%82%98/" >엔지니어링의 생산성은 어떻게 측정하나?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/23</span><a class="archive-post-title" href= "/2021/06/23/%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%84%EB%AC%B4%EB%A6%AC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%A4%EB%A0%A5%EC%9D%B4-%EB%8A%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >당신이 아무리 공부해도 개발 실력이 늘지 않는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2021/05/12/IT%EA%B8%B0%EC%97%85%EC%9D%98-6%EA%B0%80%EC%A7%80-%EB%AC%B8%ED%99%94%ED%8C%A8%ED%84%B4/" >IT기업의 6가지 문화패턴</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/14</span><a class="archive-post-title" href= "/2021/04/14/%ED%92%88%EC%A7%88%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >소프트웨어 품질이란 무엇일까?</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/2018/04/29/slack%EA%B3%BC-%EC%98%A4%ED%94%88%EC%BB%A4%EB%AE%A4%EB%8B%88%EC%BC%80%EC%9D%B4%EC%85%98/" >slack과 오픈커뮤니케이션</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2018/04/12/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98/" >개발자 채용 어떻게 해야하나?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2018/04/10/%ED%8B%B0%EB%B9%84%EB%A5%BC-%EB%B3%B4%EB%A9%B0-%EC%BD%94%EB%94%A9%ED%95%98%EB%A9%B4-%EC%95%88%EB%90%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >티비를 보며 코딩하면 안되는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/04</span><a class="archive-post-title" href= "/2018/04/04/%EC%B4%88%EB%B3%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%97%86%EC%9D%B4-TDD-%EB%B0%B0%EC%9A%B0%EA%B8%B0/" >초보를 위한 테스트 코드 없이 TDD 배우기</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/03</span><a class="archive-post-title" href= "/2018/04/03/%EB%8B%B9%EC%8B%A0%EC%9D%B4-TDD%EC%97%90-%EC%8B%A4%ED%8C%A8%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >당신이 TDD에 실패하는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2018/03/29/%EA%B8%B0%EC%88%A0-%EA%B8%B0%EB%B0%98-%ED%9A%8C%EC%82%AC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >기술 기반 회사란 무엇일까?</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="IT생각"><span class="iconfont-archer">&#xe606;</span>IT생각</span>
+    
+        <span class="sidebar-tag-name" data-tags="개발문화"><span class="iconfont-archer">&#xe606;</span>개발문화</span>
+    
+        <span class="sidebar-tag-name" data-tags="커리어"><span class="iconfont-archer">&#xe606;</span>커리어</span>
+    
+        <span class="sidebar-tag-name" data-tags="TDD"><span class="iconfont-archer">&#xe606;</span>TDD</span>
+    
+        <span class="sidebar-tag-name" data-tags="생산성"><span class="iconfont-archer">&#xe606;</span>생산성</span>
+    
+        <span class="sidebar-tag-name" data-tags="코드리뷰"><span class="iconfont-archer">&#xe606;</span>코드리뷰</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: 'wonderer'
+    }
+</script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+    </body>
+</html>
+
+

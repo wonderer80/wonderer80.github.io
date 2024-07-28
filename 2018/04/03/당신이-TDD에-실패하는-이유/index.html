@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <meta name="description" content="소프트웨어 개발에 대한 생각과 소개">
+    <title>당신이 TDD에 실패하는 이유 · wonderland</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        
+    <link rel="icon" href= /assets/favicon.ico>
+    <script>
+        (function (w) {
+            "use strict";
+            // rel=preload support test
+            if (!w.loadCSS) {
+                w.loadCSS = function () { };
+            }
+            // define on the loadCSS obj
+            var rp = loadCSS.relpreload = {};
+            // rel=preload feature support test
+            // runs once and returns a function for compat purposes
+            rp.support = (function () {
+                var ret;
+                try {
+                    ret = w.document.createElement("link").relList.supports("preload");
+                } catch (e) {
+                    ret = false;
+                }
+                return function () {
+                    return ret;
+                };
+            })();
+
+            // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+            // then change that media back to its intended value on load
+            rp.bindMediaToggle = function (link) {
+                // remember existing media attr for ultimate state, or default to 'all'
+                var finalMedia = link.media || "all";
+
+                function enableStylesheet() {
+                    link.media = finalMedia;
+                }
+
+                // bind load handlers to enable media
+                if (link.addEventListener) {
+                    link.addEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.attachEvent("onload", enableStylesheet);
+                }
+
+                // Set rel and non-applicable media type to start an async request
+                // note: timeout allows this to happen async to let rendering continue in IE
+                setTimeout(function () {
+                    link.rel = "stylesheet";
+                    link.media = "only x";
+                });
+                // also enable media after 3 seconds,
+                // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                setTimeout(enableStylesheet, 3000);
+            };
+
+            // loop through link elements in DOM
+            rp.poly = function () {
+                // double check this to prevent external calls from running
+                if (rp.support()) {
+                    return;
+                }
+                var links = w.document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    // qualify links to those with rel=preload and as=style attrs
+                    if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                        // prevent rerunning on link
+                        link.setAttribute("data-loadcss", true);
+                        // bind listeners to toggle media back
+                        rp.bindMediaToggle(link);
+                    }
+                }
+            };
+
+            // if unsupported, run the polyfill
+            if (!rp.support()) {
+                // run once at least
+                rp.poly();
+
+                // rerun poly on an interval until onload
+                var run = w.setInterval(rp.poly, 500);
+                if (w.addEventListener) {
+                    w.addEventListener("load", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                } else if (w.attachEvent) {
+                    w.attachEvent("onload", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                }
+            }
+            // commonjs
+            if (typeof exports !== "undefined") {
+                exports.loadCSS = loadCSS;
+            }
+            else {
+                w.loadCSS = loadCSS;
+            }
+        }(typeof global !== "undefined" ? global : this));
+    </script>
+    <script src="//code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-116555605-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="wonderland" type="application/atom+xml">
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >wonderland</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">당신이 TDD에 실패하는 이유</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>wonderland</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            당신이 TDD에 실패하는 이유
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "TDD">TDD</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/04/03</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
+        
+    </div>
+</div>
+        <script>
+  // load webfont-loader async, and add callback function
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+  
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+      if (postIntroTags) {
+        postIntroTags.classList.add('post-fade-in');
+      }
+      if (postIntroMeat) {
+        postIntroMeat.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a>가 나온지 많은 세월이 지났지만 TDD를 잘알고 활용하는 개발자는 흔치 않다. 그럼에도 잊을만하면 어디선가 한번씩 언급되는 TDD이기에 자세히는 몰라도 관심을 가지고 있는 개발자는 많다.</p>
+<p>어떤 개발자는 테스트 코드를 작성하는게 TDD가 아니냐고 하는 개발자도 있었다. TDD라는게 뭔가 자동화 테스트와 관련이 있는 것 같은데 자세히는 모르겠고, 막연한 뭉개구름 같은 감각적 느낌으로만 알고 있는 개발자가 흔하게 있을 정도로 TDD는 그 이름에 비해 잘 알고 있는 사람은 별로 없다.</p>
+<p>나 역시 처음 TDD를 배워보겠다고 <a target="_blank" rel="noopener" href="http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=37469717">TDDBE</a>라는 유명한 책을 구입했었다. 책을 구매해서 고개를 끄덕끄덕 하며 감탄하며 읽었는데, 다 읽고 난 후에 현실로 돌아왔을 때 남은 것은 막연함 뿐이었다.</p>
+<p>사실 그 때는 잘 몰랐지만 지금 와서 생각해보니 TDD를 제대로 익히기 어려운 이유가 있었는데 그건 TDD가 여러 기술을 요구하기 때문이다.<br><img src="/images/TDD_Global_Lifecycle.png" alt="TDD Global Lifecycle" title="보기만 해도 복잡한 TDD Lifecycle"></p>
+<h1 id="TDD를-위해-필요한-기술"><a href="#TDD를-위해-필요한-기술" class="headerlink" title="TDD를 위해 필요한 기술"></a>TDD를 위해 필요한 기술</h1><h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><p>테스트를 만들어야 하니까 결국 어떤 것을 테스트할 것인지에 대한 정의가 중요하다. 안타깝게도 많은 개발자들은 테스팅 기술을 익힐 수 있는 기회가 없다. 누군가 알려준적도 없을 뿐더러 QA(라고 쓰고 테스터라고 부르는)담당자가 별도로 있는 경우가 많기 때문이다. 그래서 대충대충 빠르게 만들고 테스트는 QA 혹은 사용자에게 미루다보니 스스로 테스팅을 잘 하고 익힐 수 있는 기회가 없다.</p>
+<h2 id="Test-Automation"><a href="#Test-Automation" class="headerlink" title="Test Automation"></a>Test Automation</h2><p>TDD에서의 테스트 수행 방식은 테스트 코드를 이용한 테스트 자동화를 의미한다. JUnit이나 RSpec 같은 Testing Framework를 주로 이용한다. 많은 개발자들은 TDD에서 이 부분이 가장 어려울 것이라고 생각하지만 실질적으로는 무엇을 테스트해야할지를 어려워하는 경우가 더 많다.</p>
+<h2 id="Refactoring"><a href="#Refactoring" class="headerlink" title="Refactoring"></a>Refactoring</h2><p>TDD의 개발 Cycle 중 필수요소로 들어가는 것이 Refactoring이다. Refactroing은 기존의 동작을 변경하지 많으면서 효율적인 코드로 개선하는 작업이다. Refactoring을 하려면 Refactoring을 하기 앞서 어떤 코드가 좋은 코드인가에 대한 기반지식이 뒷받침되어야 한다.</p>
+<h1 id="TDD를-배우기-어려운-이유"><a href="#TDD를-배우기-어려운-이유" class="headerlink" title="TDD를 배우기 어려운 이유"></a>TDD를 배우기 어려운 이유</h1><p>위의 3가지 중에 하나라도 어렵게 느껴지는 것이 있는가? TDD를 잘 하려면 위의 3가지를 기본적으로 할 수 있어야한다.<br><a target="_blank" rel="noopener" href="https://ko.wikipedia.org/wiki/%EC%9D%B8%EC%A7%80_%EB%B6%80%ED%95%98">인지 부하 이론</a>에 의하면 일반적으로 과제 해결에 요구되는 인지자원의 양이 인지구조가 보유하고 있는 자원의 용량을 초과할 때 인지과부하(cognitive overload)가 발생한다고 하는데 이는 학습 부진의 주요 원인으로 본다. 쉽게 말하면 우리가 어떤 것을 배우거나 문제를 해결할 때 필요한 기반지식이 충분히 뒷받침 되지 않으면 많은 어려움을 겪게 된다는 뜻이다.</p>
+<p>TDD는 위의 3가지 기술을 기반으로 설계와 개발을 어떤 식으로 할 것에 대한 개발 방법론인데 기본적인 기술에 대한 이해가 없는 상황에서 TDD를 시도하게 되면 결국 인지과부하가 발생될 수밖에 없게되고 결국 TDD 적용에 실패하게 된다.</p>
+<h1 id="TDD를-안할지언정-정신-승리는-하지말자"><a href="#TDD를-안할지언정-정신-승리는-하지말자" class="headerlink" title="TDD를 안할지언정 정신 승리는 하지말자"></a>TDD를 안할지언정 정신 승리는 하지말자</h1><p>간혹 테스트 코드를 짜냐는 질문에 자긴 TDD를 좋아하지 않는다고 답하는 개발자들을 보고는 한다. 그들이 내세우는 근거는 대부분 테스트 코드는 짜는데 시간이 많이 걸려서 효율이 좋지 않다는 것과 <a target="_blank" rel="noopener" href="https://sangwook.github.io/2014/04/25/tdd-is-dead-long-live-testing.html">TDD는 죽었다 - 번역</a>의 내용을 인용하는 것이다. 여기서 문제는 보통 이런 주장을 하는 사람들의 대부분은 테스트 자동화와 TDD를 구분하지 못할 뿐더러, 당연히 제대로 테스트 코드를 짜보거나 TDD를 경험해보지 못했다는 것이다. 사실 ‘TDD는 죽었다’라는 글을 쓴 DHH 는 테스트 자체를 반대한 것은 아니다.</p>
+<p>완벽한 기술이란 없다. 하지만 본인이 지금 못한다고 해서 무조건적인 비하는 하지말자. TDD를 못한다고 볼품없는 개발자가 되는 것도 아니다. 하지만 배우기도 전에 거부하는 것은 스스로 배움의 기회를 멀리 차버리는 것과 같다.</p>
+<h1 id="TDD를-꼭-배우고-싶은데-그럼-어떻게-하면-좋을까"><a href="#TDD를-꼭-배우고-싶은데-그럼-어떻게-하면-좋을까" class="headerlink" title="TDD를 꼭 배우고 싶은데 그럼 어떻게 하면 좋을까?"></a>TDD를 꼭 배우고 싶은데 그럼 어떻게 하면 좋을까?</h1><p>어쩃든 여러분이 TDD를 배우기 어렵다는 것은 잘 알았다. 그럼 어떻게 TDD를 익혀나갈 수 있을 것인가? 가장 쉽고 빠른 방법은 TDD를 이미 잘 이해하고 사용하는 개발자에게 배우는 것이다. <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Pair_programming">페어 프로그래밍</a>을 할 수 있으면 금상첨화다. 여러분 주위에 그런 사람이 있으면 그건 정말 큰 행운이라고 생각한다.</p>
+<p>하지만 불행하게도(일반적으로) 주위에 그런 개발자가 없다면 결국 혼자 익히는 수밖에는 없다. 솔직히 필자는 TDD를 처음 접할 때 테스트 코드라는게 무엇인지도 전혀 이해를 못했다. 그럼에도 TDD를 개발에 적용할 수 있었는데 오히려 무지했기에 가능한 방법이었던 것 같다. 필자가 TDD를 어떤 방식으로 활용했고 배웠는지 궁금한가? 나는 무슨 방법을 써서라도 TDD를 익혀보고 싶다면 필자의 방법을 참고해보도록 하라.</p>
+<p><em>다음 포스팅을 통해 필자가 익힌 邪派의 기술을 전수해주겠다.</em></p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="previous">
+          
+              <div class="prevSlogan">Previous Post</div>
+              <a href= "/2018/03/29/%EA%B8%B0%EC%88%A0-%EA%B8%B0%EB%B0%98-%ED%9A%8C%EC%82%AC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" title= 기술 기반 회사란 무엇일까? >
+                  <div class="prevTitle">기술 기반 회사란 무엇일까?</div>
+              </a>
+          
+        </li>
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/04/04/%EC%B4%88%EB%B3%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%97%86%EC%9D%B4-TDD-%EB%B0%B0%EC%9A%B0%EA%B8%B0/" title= 초보를 위한 테스트 코드 없이 TDD 배우기 >
+                    <div class="nextTitle">초보를 위한 테스트 코드 없이 TDD 배우기</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = "https://wonderer80.github.io/2018/04/03/%EB%8B%B9%EC%8B%A0%EC%9D%B4-TDD%EC%97%90-%EC%8B%A4%ED%8C%A8%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "당신이 TDD에 실패하는 이유"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://wonderland-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:wonderv@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TDD%EB%A5%BC-%EC%9C%84%ED%95%B4-%ED%95%84%EC%9A%94%ED%95%9C-%EA%B8%B0%EC%88%A0"><span class="toc-number">1.</span> <span class="toc-text">TDD를 위해 필요한 기술</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Testing"><span class="toc-number">1.1.</span> <span class="toc-text">Testing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Test-Automation"><span class="toc-number">1.2.</span> <span class="toc-text">Test Automation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Refactoring"><span class="toc-number">1.3.</span> <span class="toc-text">Refactoring</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TDD%EB%A5%BC-%EB%B0%B0%EC%9A%B0%EA%B8%B0-%EC%96%B4%EB%A0%A4%EC%9A%B4-%EC%9D%B4%EC%9C%A0"><span class="toc-number">2.</span> <span class="toc-text">TDD를 배우기 어려운 이유</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TDD%EB%A5%BC-%EC%95%88%ED%95%A0%EC%A7%80%EC%96%B8%EC%A0%95-%EC%A0%95%EC%8B%A0-%EC%8A%B9%EB%A6%AC%EB%8A%94-%ED%95%98%EC%A7%80%EB%A7%90%EC%9E%90"><span class="toc-number">3.</span> <span class="toc-text">TDD를 안할지언정 정신 승리는 하지말자</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TDD%EB%A5%BC-%EA%BC%AD-%EB%B0%B0%EC%9A%B0%EA%B3%A0-%EC%8B%B6%EC%9D%80%EB%8D%B0-%EA%B7%B8%EB%9F%BC-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%98%EB%A9%B4-%EC%A2%8B%EC%9D%84%EA%B9%8C"><span class="toc-number">4.</span> <span class="toc-text">TDD를 꼭 배우고 싶은데 그럼 어떻게 하면 좋을까?</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 14 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2022 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/13</span><a class="archive-post-title" href= "/2022/04/13/%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0-%EA%B0%9C%EC%84%A0%ED%95%B4%EB%82%98%EA%B0%80%EA%B8%B0/" >코드 리뷰 개선해나기기</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2022/02/09/%EC%9A%B0%EB%A6%B0-%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%9E%98%ED%95%98%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C/" >우린 코드리뷰 잘하고 있을까?</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2021/11/10/%EC%8B%9C%EB%8B%88%EC%96%B4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EC%84%A0%ED%83%9D%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%A6%AC%EB%8D%94-%ED%8F%AC%EC%A7%80%EC%85%98/" >시니어 개발자가 선택할 수 있는 리더 포지션</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2021/10/13/%EA%B2%BD%EC%9F%81%EB%A0%A5%EC%9E%88%EB%8A%94-%EC%8B%9C%EB%8B%88%EC%96%B4%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C-%EC%84%B1%EC%9E%A5%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/" >경쟁력있는 시니어 개발자로 성장하는 방법</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/14</span><a class="archive-post-title" href= "/2021/07/14/%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%EC%9D%98-%EC%83%9D%EC%82%B0%EC%84%B1%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B8%A1%EC%A0%95%ED%95%98%EB%82%98/" >엔지니어링의 생산성은 어떻게 측정하나?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/23</span><a class="archive-post-title" href= "/2021/06/23/%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%84%EB%AC%B4%EB%A6%AC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%A4%EB%A0%A5%EC%9D%B4-%EB%8A%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >당신이 아무리 공부해도 개발 실력이 늘지 않는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2021/05/12/IT%EA%B8%B0%EC%97%85%EC%9D%98-6%EA%B0%80%EC%A7%80-%EB%AC%B8%ED%99%94%ED%8C%A8%ED%84%B4/" >IT기업의 6가지 문화패턴</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/14</span><a class="archive-post-title" href= "/2021/04/14/%ED%92%88%EC%A7%88%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >소프트웨어 품질이란 무엇일까?</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/2018/04/29/slack%EA%B3%BC-%EC%98%A4%ED%94%88%EC%BB%A4%EB%AE%A4%EB%8B%88%EC%BC%80%EC%9D%B4%EC%85%98/" >slack과 오픈커뮤니케이션</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2018/04/12/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98/" >개발자 채용 어떻게 해야하나?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2018/04/10/%ED%8B%B0%EB%B9%84%EB%A5%BC-%EB%B3%B4%EB%A9%B0-%EC%BD%94%EB%94%A9%ED%95%98%EB%A9%B4-%EC%95%88%EB%90%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >티비를 보며 코딩하면 안되는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/04</span><a class="archive-post-title" href= "/2018/04/04/%EC%B4%88%EB%B3%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%97%86%EC%9D%B4-TDD-%EB%B0%B0%EC%9A%B0%EA%B8%B0/" >초보를 위한 테스트 코드 없이 TDD 배우기</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/03</span><a class="archive-post-title" href= "/2018/04/03/%EB%8B%B9%EC%8B%A0%EC%9D%B4-TDD%EC%97%90-%EC%8B%A4%ED%8C%A8%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >당신이 TDD에 실패하는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2018/03/29/%EA%B8%B0%EC%88%A0-%EA%B8%B0%EB%B0%98-%ED%9A%8C%EC%82%AC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >기술 기반 회사란 무엇일까?</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="IT생각"><span class="iconfont-archer">&#xe606;</span>IT생각</span>
+    
+        <span class="sidebar-tag-name" data-tags="개발문화"><span class="iconfont-archer">&#xe606;</span>개발문화</span>
+    
+        <span class="sidebar-tag-name" data-tags="커리어"><span class="iconfont-archer">&#xe606;</span>커리어</span>
+    
+        <span class="sidebar-tag-name" data-tags="TDD"><span class="iconfont-archer">&#xe606;</span>TDD</span>
+    
+        <span class="sidebar-tag-name" data-tags="생산성"><span class="iconfont-archer">&#xe606;</span>생산성</span>
+    
+        <span class="sidebar-tag-name" data-tags="코드리뷰"><span class="iconfont-archer">&#xe606;</span>코드리뷰</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: 'wonderer'
+    }
+</script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+    </body>
+</html>
+
+

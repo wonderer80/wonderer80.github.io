@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <meta name="description" content="소프트웨어 개발에 대한 생각과 소개">
+    <title>wonderland</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+        
+    <link rel="icon" href= /assets/favicon.ico>
+    <script>
+        (function (w) {
+            "use strict";
+            // rel=preload support test
+            if (!w.loadCSS) {
+                w.loadCSS = function () { };
+            }
+            // define on the loadCSS obj
+            var rp = loadCSS.relpreload = {};
+            // rel=preload feature support test
+            // runs once and returns a function for compat purposes
+            rp.support = (function () {
+                var ret;
+                try {
+                    ret = w.document.createElement("link").relList.supports("preload");
+                } catch (e) {
+                    ret = false;
+                }
+                return function () {
+                    return ret;
+                };
+            })();
+
+            // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+            // then change that media back to its intended value on load
+            rp.bindMediaToggle = function (link) {
+                // remember existing media attr for ultimate state, or default to 'all'
+                var finalMedia = link.media || "all";
+
+                function enableStylesheet() {
+                    link.media = finalMedia;
+                }
+
+                // bind load handlers to enable media
+                if (link.addEventListener) {
+                    link.addEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.attachEvent("onload", enableStylesheet);
+                }
+
+                // Set rel and non-applicable media type to start an async request
+                // note: timeout allows this to happen async to let rendering continue in IE
+                setTimeout(function () {
+                    link.rel = "stylesheet";
+                    link.media = "only x";
+                });
+                // also enable media after 3 seconds,
+                // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                setTimeout(enableStylesheet, 3000);
+            };
+
+            // loop through link elements in DOM
+            rp.poly = function () {
+                // double check this to prevent external calls from running
+                if (rp.support()) {
+                    return;
+                }
+                var links = w.document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    // qualify links to those with rel=preload and as=style attrs
+                    if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                        // prevent rerunning on link
+                        link.setAttribute("data-loadcss", true);
+                        // bind listeners to toggle media back
+                        rp.bindMediaToggle(link);
+                    }
+                }
+            };
+
+            // if unsupported, run the polyfill
+            if (!rp.support()) {
+                // run once at least
+                rp.poly();
+
+                // rerun poly on an interval until onload
+                var run = w.setInterval(rp.poly, 500);
+                if (w.addEventListener) {
+                    w.addEventListener("load", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                } else if (w.attachEvent) {
+                    w.attachEvent("onload", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                }
+            }
+            // commonjs
+            if (typeof exports !== "undefined") {
+                exports.loadCSS = loadCSS;
+            }
+            else {
+                w.loadCSS = loadCSS;
+            }
+        }(typeof global !== "undefined" ? global : this));
+    </script>
+    <script src="//code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-116555605-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="wonderland" type="application/atom+xml">
+</head>
+
+    
+        <body class="home-body">
+    
+    
+<header class="header index-header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <a class="home-link" href=/>wonderland</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 文章页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            wonderland
+            <!-- 文章页  -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+                There is no end though there is a start in space
+            
+            <!-- 文章页  -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+    </div>
+</div>
+        <script>
+  // load webfont-loader async, and add callback function
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+  
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+      if (postIntroTags) {
+        postIntroTags.classList.add('post-fade-in');
+      }
+      if (postIntroMeat) {
+        postIntroMeat.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main index-page">
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2022/04/13/%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0-%EA%B0%9C%EC%84%A0%ED%95%B4%EB%82%98%EA%B0%80%EA%B8%B0/" >
+                
+                    <span>코드 리뷰 개선해나기기</span>
+            </a>
+            <div class="abstract-content">
+                지난 번 글에 이어 이번 글에서는 필자가 속한 조직에서 필자가 입사했을 때 당시의 시점에서부터 현재까지 코드 리뷰 과정에서의 고민과 변화들을 이야기해보도록 하겠다.
+코드 리뷰를 처음 도입하는 회사들은 Github의 PR(Pull Request) 리뷰에서 시작하게 되는 경우가 많다. 하지만 처음에는 어떤 식으로 리뷰를 해야하는지 잘 모르기 때문에 로직적으로 결함이 있는지, 컨벤션은 준수되었는지와 같은 코드 스타일을 주로 본다. 필자가 입사 했을 때 당시에도 주로 코드 스타일이나 로직에 대한 부분의 피드백이 중점적이었다. 그리고 ...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/13</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "개발문화">개발문화</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "코드리뷰">코드리뷰</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2022/02/09/%EC%9A%B0%EB%A6%B0-%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%9E%98%ED%95%98%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C/" >
+                
+                    <span>우린 코드리뷰 잘하고 있을까?</span>
+            </a>
+            <div class="abstract-content">
+                코드 리뷰 남들도 다 하더라코드 리뷰 라는 말이 이제는 개발자라면 누구나 익숙한 관용어가 되었지만, 이 용어가 생소했던 시절이 생각보다 그리 오래 전은 아니다. 과거에는 코드는 작성한 개인의 소유물 처럼 여겨졌고 그렇기에 코드에 대한 비판은 나 자신의 비판으로 여겼기에 누군가가 나의 코드를 보는 것 자체만으로 거부감이 있었던 시기도 있었다. 하지만 최근에는 오히려 코드 리뷰를 하지 않는 조직은 시대에서 뒤쳐지는 것처럼 느껴지는 정도의 분위기가 된 것 같다.
+반면 최근에 여러 개발자들과 이야기를 나눠보면 본인이 속한 조직에서 코...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/02/09</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "개발문화">개발문화</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "코드리뷰">코드리뷰</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2021/11/10/%EC%8B%9C%EB%8B%88%EC%96%B4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EC%84%A0%ED%83%9D%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%A6%AC%EB%8D%94-%ED%8F%AC%EC%A7%80%EC%85%98/" >
+                
+                    <span>시니어 개발자가 선택할 수 있는 리더 포지션</span>
+            </a>
+            <div class="abstract-content">
+                왜 리더로 성장해야 하는가?국내에서 개발자로 생활하면서 느꼈던 것은 많은 개발자들이 연차가 쌓이면서 관리자 역할을 하는 것에 대해 두려움을 느낀다는 것이었다. 관리자는 기술직이 아니며 관리자로 일한다는 것은 자신의 개발자로서의 전문성을 발휘하지 못하고 점점 도태된다고 느끼기 때문이다. 그렇기에 많은 개발자들은 자신이 백발이 될 때까지 개발을 하고 싶다는 환상을 가지고 있다. 
+반면 우리가 많은 회사에서 경험한 관리자들은 과거에 개발자였다가 어느 순간 관리자를 맡게 된 사람들이며, 주로 일정 관리나 여러 미팅에 참여하면서 기술적...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/11/10</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "커리어">커리어</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2021/10/13/%EA%B2%BD%EC%9F%81%EB%A0%A5%EC%9E%88%EB%8A%94-%EC%8B%9C%EB%8B%88%EC%96%B4%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C-%EC%84%B1%EC%9E%A5%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/" >
+                
+                    <span>경쟁력있는 시니어 개발자로 성장하는 방법</span>
+            </a>
+            <div class="abstract-content">
+                개발자가 귀한 시대이다. 여러 IT 회사들이 개발자를 모시기 위해 경쟁을 하고 있다.국내에서는 여전히 생소한 용어지만 나름 이름 있는 IT 회사들은 Developer Relations(DevRel) 라고 하는 대외 개발자들을 대상으로 홍보하는 조직을 구성하여 운영하거나 최소한 HR팀에서 개발자 채용이나 홍보 등을 전담으로 하는 경우도 많이 있다. 필자도 얼마전 T사에서 근무하는 지인이 개발자 채용에 관련해서 조언을 구하기도 했다.
+하지만 이 역시 빈익빈부익부 현상이 존재한다. 과거에는 영세한 IT 회사들이 돈이 없다보니 오히려...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/10/13</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "커리어">커리어</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2021/07/14/%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%EC%9D%98-%EC%83%9D%EC%82%B0%EC%84%B1%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B8%A1%EC%A0%95%ED%95%98%EB%82%98/" >
+                
+                    <span>엔지니어링의 생산성은 어떻게 측정하나?</span>
+            </a>
+            <div class="abstract-content">
+                필자가 다니고 있는 회사는 소위 매트릭스 조직으로 운영을 하고 있다. 개발자는 교차 기능팀(Cross-functional Team)에서 공동의 목표를 가지고 가설과 실험을 통해 신규 기능 개발을 하거나 기존 기능의 개선 업무를 수행하거나 기능팀(Functional Team)에서 개발자들의 생산성 향상을 위한 레거시 개선 및 개발 환경 개선을 위한 업무를 수행할 수 있다. 
+대부분의 IT기업에서 개발자는 한정적이고 하고 싶은 혹은 해야만 하는 일들은 많기 때문에 어떤 일을 우선적으로 해야 하는지에 대한 가치 판단 및 우선순위 설...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/14</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "개발문화">개발문화</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "생산성">생산성</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2021/06/23/%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%84%EB%AC%B4%EB%A6%AC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%A4%EB%A0%A5%EC%9D%B4-%EB%8A%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >
+                
+                    <span>당신이 아무리 공부해도 개발 실력이 늘지 않는 이유</span>
+            </a>
+            <div class="abstract-content">
+                당신이 아무리 공부해도 개발 실력이 늘지 않는 이유지식은 기술이 아니다백엔드 개발자 4년 차인 A 씨는 퇴근 후에 자기 개발을 위해 기술 도서를 꾸준히 읽는다. 최근에는 리팩토링이라는 책을 읽고 사내의 개발자들에게 자신이 공부한 것에 대해 발표도 했다. 하지만 아쉬운 점도 있다. 마음만 먹으면 언제든 리팩토링 할 수는 있지만 항상 바쁜 일정 때문에 리팩토링 할 시간이 없다. 사실 지금도 그럭저럭 잘 돌아가고 있는데 리팩토링을 한다고 새로운 비지니스 가치가 더해지는 것도 아니니 그 시간에 새로운 기능을 하나 더 만드는게 낫지 않...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/06/23</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2021/05/12/IT%EA%B8%B0%EC%97%85%EC%9D%98-6%EA%B0%80%EC%A7%80-%EB%AC%B8%ED%99%94%ED%8C%A8%ED%84%B4/" >
+                
+                    <span>IT기업의 6가지 문화패턴</span>
+            </a>
+            <div class="abstract-content">
+                최근 IT 기업에서 개발자들을 모시기 위한 경쟁이 치열해지고 있다. 개발자들이 회사를 선택할 때 보는 요소 중에 금전적인 부분도 중요한 요소 중의 하나일 수는 있겠지만 좋은 개발문화를 가지고 있는지도 개발자들에게 중요한 관심사 중의 하나이다. 좋은 개발 문화에서 일할 때 개발자로서의 높은 성장도 기대할 수 있다고 믿기 때문이다. 그렇기 때문에 회사들은 몸값 경쟁 이외에도 회사의 개발문화를 홍보하기 위한 노력도 많이 기울이고 있다.근데 좋은 개발문화라는 것은 무엇일까? 애자일 프로세스를 적용하고 있다든지, 코드 리뷰를 한다든지,...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/05/12</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "개발문화">개발문화</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2021/04/14/%ED%92%88%EC%A7%88%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >
+                
+                    <span>소프트웨어 품질이란 무엇일까?</span>
+            </a>
+            <div class="abstract-content">
+                오래전부터 개발자로서 품질에 대한 고민이 많았다. 나에게 좋은 품질이라고 한다면 버그가 없는 코드를 의미했고, 유지보수하기 쉬운 설계와 코드, 기획 의도가 잘 구현된 것을 의미했다. 나는 품질이 높은 코드를 만들고 싶었지만, 현실은 항상 녹록하지 않았다. 항상 시간에 쫓겨서 만들어야 했고 품질을 유지하기 위해서는 비개발자 뿐만 아니라 동료개발자도 설득해야만 했다. 나에겐 명확하게 보이는 것들이 많은 설득을 하거나 내 개인 시간을 할애하면서까지 품질을 유지해야 한다는 것이 이해가 되지 않았다.
+오늘은 이런 여러 고민을 해결하기 ...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/04/14</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2018/04/29/slack%EA%B3%BC-%EC%98%A4%ED%94%88%EC%BB%A4%EB%AE%A4%EB%8B%88%EC%BC%80%EC%9D%B4%EC%85%98/" >
+                
+                    <span>slack과 오픈커뮤니케이션</span>
+            </a>
+            <div class="abstract-content">
+                필자의 아이들이 다니고 있는 대안학교에서는 학부모간에 대화를 나눠야하는 일이 많다.
+주로 텔레그램으로 대화를 나누고 있는데 회사에서 슬랙을 경험해 본 필자 입장에서는 텔레방이 너무 불편하고 복잡하게 느껴졌다. 그래서 종종 학부모나 선생님들에게 슬랙을 소개하고는 했는데, 막상 장점을 말하려니까 설명이 어려웠다.
+다행히 관심을 가진 분들이 계셔서 슬랙을 학교 월례회의 때 소개할 수 있는 기회가 생기게 되었고, 나도 다시 한번 슬랙의 장점에 대해 생각해보는 기회가 되었다.
+오픈 커뮤니케이션 도구로서의 슬랙오늘은 슬랙의 장점 중 필자...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/29</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "개발문화">개발문화</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2018/04/12/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98/" >
+                
+                    <span>개발자 채용 어떻게 해야하나?</span>
+            </a>
+            <div class="abstract-content">
+                ‘개발자 채용 시 기술실력 검증 어떻게 해야 하나’ 라는 주제로 김창준님 강연에 다녀왔다.좋은 기회를 마련해주신 김창준님께 먼저 감사드린다.
+전체적인 요약은 다른 분들이 이미 잘 정리해주셨기에, 이 포스팅에서는 강연 내용을 듣고 채용에 대해 필자가 생각해왔던 부분을 정리해보고자 한다.
+
+이호성님 브런치
+창천향로님의 칼럼
+
+어떤 사람을 뽑을 것인가?필자도 평소에 ‘어떤 사람을 뽑아야하는가’에 대한 고민이 많이 있었는데, 그 이전에 ‘왜 사람을 뽑는가?’ 와 관련이 있을 것 같다. 대부분의 회사가 개발자를 뽑는 이유는 ‘할일은 많...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/12</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">NEXT &#62;</a>
+    </nav>
+    
+</main>
+            <!-- profile -->
+            
+            <div class="profile">
+    <img class="profile-avatar" src= /avatar/wonderer.jpeg >
+    <div class="profile-name">wonderer</div>
+    
+    <div class="profile-signature">
+        호기심으로 가득한 사람
+    </div>
+    
+    
+    <div class="profile-social">
+        
+    
+        
+            
+                <a href="mailto:wonderv@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    
+    
+</div>
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:wonderv@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 14 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2022 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/13</span><a class="archive-post-title" href= "/2022/04/13/%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0-%EA%B0%9C%EC%84%A0%ED%95%B4%EB%82%98%EA%B0%80%EA%B8%B0/" >코드 리뷰 개선해나기기</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2022/02/09/%EC%9A%B0%EB%A6%B0-%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%9E%98%ED%95%98%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C/" >우린 코드리뷰 잘하고 있을까?</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2021/11/10/%EC%8B%9C%EB%8B%88%EC%96%B4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EC%84%A0%ED%83%9D%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%A6%AC%EB%8D%94-%ED%8F%AC%EC%A7%80%EC%85%98/" >시니어 개발자가 선택할 수 있는 리더 포지션</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2021/10/13/%EA%B2%BD%EC%9F%81%EB%A0%A5%EC%9E%88%EB%8A%94-%EC%8B%9C%EB%8B%88%EC%96%B4%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C-%EC%84%B1%EC%9E%A5%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/" >경쟁력있는 시니어 개발자로 성장하는 방법</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/14</span><a class="archive-post-title" href= "/2021/07/14/%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%EC%9D%98-%EC%83%9D%EC%82%B0%EC%84%B1%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B8%A1%EC%A0%95%ED%95%98%EB%82%98/" >엔지니어링의 생산성은 어떻게 측정하나?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/23</span><a class="archive-post-title" href= "/2021/06/23/%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%84%EB%AC%B4%EB%A6%AC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%A4%EB%A0%A5%EC%9D%B4-%EB%8A%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >당신이 아무리 공부해도 개발 실력이 늘지 않는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2021/05/12/IT%EA%B8%B0%EC%97%85%EC%9D%98-6%EA%B0%80%EC%A7%80-%EB%AC%B8%ED%99%94%ED%8C%A8%ED%84%B4/" >IT기업의 6가지 문화패턴</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/14</span><a class="archive-post-title" href= "/2021/04/14/%ED%92%88%EC%A7%88%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >소프트웨어 품질이란 무엇일까?</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/2018/04/29/slack%EA%B3%BC-%EC%98%A4%ED%94%88%EC%BB%A4%EB%AE%A4%EB%8B%88%EC%BC%80%EC%9D%B4%EC%85%98/" >slack과 오픈커뮤니케이션</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2018/04/12/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98/" >개발자 채용 어떻게 해야하나?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2018/04/10/%ED%8B%B0%EB%B9%84%EB%A5%BC-%EB%B3%B4%EB%A9%B0-%EC%BD%94%EB%94%A9%ED%95%98%EB%A9%B4-%EC%95%88%EB%90%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >티비를 보며 코딩하면 안되는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/04</span><a class="archive-post-title" href= "/2018/04/04/%EC%B4%88%EB%B3%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%97%86%EC%9D%B4-TDD-%EB%B0%B0%EC%9A%B0%EA%B8%B0/" >초보를 위한 테스트 코드 없이 TDD 배우기</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/03</span><a class="archive-post-title" href= "/2018/04/03/%EB%8B%B9%EC%8B%A0%EC%9D%B4-TDD%EC%97%90-%EC%8B%A4%ED%8C%A8%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >당신이 TDD에 실패하는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2018/03/29/%EA%B8%B0%EC%88%A0-%EA%B8%B0%EB%B0%98-%ED%9A%8C%EC%82%AC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >기술 기반 회사란 무엇일까?</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="IT생각"><span class="iconfont-archer">&#xe606;</span>IT생각</span>
+    
+        <span class="sidebar-tag-name" data-tags="개발문화"><span class="iconfont-archer">&#xe606;</span>개발문화</span>
+    
+        <span class="sidebar-tag-name" data-tags="커리어"><span class="iconfont-archer">&#xe606;</span>커리어</span>
+    
+        <span class="sidebar-tag-name" data-tags="TDD"><span class="iconfont-archer">&#xe606;</span>TDD</span>
+    
+        <span class="sidebar-tag-name" data-tags="생산성"><span class="iconfont-archer">&#xe606;</span>생산성</span>
+    
+        <span class="sidebar-tag-name" data-tags="코드리뷰"><span class="iconfont-archer">&#xe606;</span>코드리뷰</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: 'wonderer'
+    }
+</script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+    </body>
+</html>
+
+

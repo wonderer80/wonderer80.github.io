@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <meta name="description" content="소프트웨어 개발에 대한 생각과 소개">
+    <title>slack과 오픈커뮤니케이션 · wonderland</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        
+    <link rel="icon" href= /assets/favicon.ico>
+    <script>
+        (function (w) {
+            "use strict";
+            // rel=preload support test
+            if (!w.loadCSS) {
+                w.loadCSS = function () { };
+            }
+            // define on the loadCSS obj
+            var rp = loadCSS.relpreload = {};
+            // rel=preload feature support test
+            // runs once and returns a function for compat purposes
+            rp.support = (function () {
+                var ret;
+                try {
+                    ret = w.document.createElement("link").relList.supports("preload");
+                } catch (e) {
+                    ret = false;
+                }
+                return function () {
+                    return ret;
+                };
+            })();
+
+            // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+            // then change that media back to its intended value on load
+            rp.bindMediaToggle = function (link) {
+                // remember existing media attr for ultimate state, or default to 'all'
+                var finalMedia = link.media || "all";
+
+                function enableStylesheet() {
+                    link.media = finalMedia;
+                }
+
+                // bind load handlers to enable media
+                if (link.addEventListener) {
+                    link.addEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.attachEvent("onload", enableStylesheet);
+                }
+
+                // Set rel and non-applicable media type to start an async request
+                // note: timeout allows this to happen async to let rendering continue in IE
+                setTimeout(function () {
+                    link.rel = "stylesheet";
+                    link.media = "only x";
+                });
+                // also enable media after 3 seconds,
+                // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                setTimeout(enableStylesheet, 3000);
+            };
+
+            // loop through link elements in DOM
+            rp.poly = function () {
+                // double check this to prevent external calls from running
+                if (rp.support()) {
+                    return;
+                }
+                var links = w.document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    // qualify links to those with rel=preload and as=style attrs
+                    if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                        // prevent rerunning on link
+                        link.setAttribute("data-loadcss", true);
+                        // bind listeners to toggle media back
+                        rp.bindMediaToggle(link);
+                    }
+                }
+            };
+
+            // if unsupported, run the polyfill
+            if (!rp.support()) {
+                // run once at least
+                rp.poly();
+
+                // rerun poly on an interval until onload
+                var run = w.setInterval(rp.poly, 500);
+                if (w.addEventListener) {
+                    w.addEventListener("load", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                } else if (w.attachEvent) {
+                    w.attachEvent("onload", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                }
+            }
+            // commonjs
+            if (typeof exports !== "undefined") {
+                exports.loadCSS = loadCSS;
+            }
+            else {
+                w.loadCSS = loadCSS;
+            }
+        }(typeof global !== "undefined" ? global : this));
+    </script>
+    <script src="//code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-116555605-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="wonderland" type="application/atom+xml">
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >wonderland</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">slack과 오픈커뮤니케이션</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>wonderland</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            slack과 오픈커뮤니케이션
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "개발문화">개발문화</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/04/29</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
+        
+    </div>
+</div>
+        <script>
+  // load webfont-loader async, and add callback function
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+  
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+      if (postIntroTags) {
+        postIntroTags.classList.add('post-fade-in');
+      }
+      if (postIntroMeat) {
+        postIntroMeat.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>필자의 아이들이 다니고 있는 대안학교에서는 학부모간에 대화를 나눠야하는 일이 많다.</p>
+<p>주로 텔레그램으로 대화를 나누고 있는데 회사에서 슬랙을 경험해 본 필자 입장에서는 텔레방이 너무 불편하고 복잡하게 느껴졌다. 그래서 종종 학부모나 선생님들에게 슬랙을 소개하고는 했는데, 막상 장점을 말하려니까 설명이 어려웠다.</p>
+<p>다행히 관심을 가진 분들이 계셔서 슬랙을 학교 월례회의 때 소개할 수 있는 기회가 생기게 되었고, 나도 다시 한번 슬랙의 장점에 대해 생각해보는 기회가 되었다.<br><img src="/images/slack_overview.png" alt="Slack Overview" title="slack"></p>
+<h2 id="오픈-커뮤니케이션-도구로서의-슬랙"><a href="#오픈-커뮤니케이션-도구로서의-슬랙" class="headerlink" title="오픈 커뮤니케이션 도구로서의 슬랙"></a>오픈 커뮤니케이션 도구로서의 슬랙</h2><p>오늘은 슬랙의 장점 중 필자가 가장 중요하다고 생각하는 오픈 커뮤니케이션 도구로서의 슬랙을 이야기해보고자 한다.</p>
+<p>슬랙은 여러 편리한 기능이 있지만 개인적으로 가장 인상적인 부분은 기본적으로 생성된 채널(단체대화방)이 공개라는 것이다. 현재 생성되어 있는 모든 채널 리스트를 볼 수 있을 뿐만 아니라, 채널에 올라온 과거의 글들까지 모두 볼 수 있었다. 누군가 초대하지 않아도 본인이 원하면 채널에 들어와서 대화에 참여할 수도 있다.</p>
+<p>한번은 필자가 속한 서버팀 채널에 사람들과 워크샵 논의를 하며 워크샵 장소를 공유한 적이 있다. 그런데 항상 서버팀 채널에 상주하며 대화를 즐기던 데브옵스 리더가 공유한 내용에 이모지를 붙이더니 잠시 후 데브옵스도 워크샵을 가겠다며 같은 날짜에 근처 숙소에 워크샵 장소를 잡았다고 공표했다.</p>
+<p>그러자 클라이언트팀, 기획팀, 애자일코치팀까지 모두 같은 날, 같은 펜션으로 워크샵을 잡는 사태가 벌어졌다. 덕분에 워크샵 장소에 가서는 팀과 상관없이 모두가 함께 즐거운 시간을 보낼 수 있었다. 이러한 해프닝은 슬랙의 정보 개방성의 특징이 보여준 일화라고 볼 수 있다.<br><img src="/images/workshop-together.jpg" alt="workshop together" title="we are the world"></p>
+<h2 id="다른-사람에게-딴지를-걸-수-있는가"><a href="#다른-사람에게-딴지를-걸-수-있는가" class="headerlink" title="다른 사람에게 딴지를 걸 수 있는가?"></a>다른 사람에게 딴지를 걸 수 있는가?</h2><p>김창준님의 <a target="_blank" rel="noopener" href="http://agile.egloos.com/5904102">협업의 5가지 미신</a> 강연에서 인용한 Eduardo Salas 의 연구에 따르면, 팀의 효과성을 예측하는 중요한 변수로 Mutual performance monitoring 이라는게 있다고 한다. Mutual performance monitoring 이란 쉽게 말하자면 다른 사람이 일하는 것을 들여다보고 피드백(딴지)을 줄 수 있는가를 말한다.</p>
+<p>슬랙은 이런 면에서 우리가 여러 채널에 관심을 갖고 의견을 표시하기 쉽도록 되어 있다고 볼 수 있다. 가볍게는 누군가의 대화에 이모지를 붙일 수도 있고 여러 사람들에게 의견을 묻거나 자신의 의견을 말할 수도 있다. 최근 IT기업에서는 사무실에 오픈 오피스를 도입하거나 confluence 같은 위키를 사용하는 기업이 많다. 이러한 모두가 협업을 위한 정보의 공유와 오픈 커뮤니케이션을 용이하게 해주는 도구라고 볼 수 있다.</p>
+<h2 id="잘-이해하고-쓰는-것이-필요하다"><a href="#잘-이해하고-쓰는-것이-필요하다" class="headerlink" title="잘 이해하고 쓰는 것이 필요하다"></a>잘 이해하고 쓰는 것이 필요하다</h2><p>하지만 이런 도구를 다 사용하고 있음에도 협업이나 오픈 커뮤니케이션을 하고 있다는 느낌이 들지 않을 수 있다. 이런 경우 다음과 같은 분위기가 있지 않은가 살펴보자.</p>
+<ul>
+<li>채널에 초대받지 않은 사람들이 들어와서 구경하거나 의견을 내는 것이 불편하다</li>
+<li>작성자 이외의 사람이 위키페이지에 와서 편집을 하거나 댓글을 다는 것이 불편하다</li>
+<li>슬랙에 생성된 채널의 대부분은 주제중심이 아닌 조직구성을 반영한 채널이다</li>
+<li>공개된 채널(혹은 위키페이지)이 별로 없고 비밀채널이 대부분이다</li>
+</ul>
+<p>아이방에 공부책상을 사다 놓는다고 아이가 공부를 열심히 하게 되는 것이 아니듯이 도구는 결국 도구일 뿐이다. 이러한 도구들의 장점과 철학을 잘 이해하지 않고 단지 도입하는 것만으로는 회사의 문화가 바뀌지는 않는다.</p>
+<p>우리가 회사에 입사할 때에는 특정한 역할로 지원하고 입사하게 되지만, 한 사람이 가지고 있는 재능은 다양하다. 서로가 서로의 일에 관심을 갖고 의견을 나눌 수 있을 때 조직에서 협업이 일어나고 효율이 좋아진다. 이번 계기로 필자도 협업과 오픈 커뮤니케이션이라는 것에 다시 한번 생각해보는 계기가 되었다. 우리들이 속한 환경에서 즐겁고 활발한 커뮤니케이션이 많이 일어났으면 하는 바람이다.</p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="previous">
+          
+              <div class="prevSlogan">Previous Post</div>
+              <a href= "/2018/04/12/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98/" title= 개발자 채용 어떻게 해야하나? >
+                  <div class="prevTitle">개발자 채용 어떻게 해야하나?</div>
+              </a>
+          
+        </li>
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2021/04/14/%ED%92%88%EC%A7%88%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" title= 소프트웨어 품질이란 무엇일까? >
+                    <div class="nextTitle">소프트웨어 품질이란 무엇일까?</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = "https://wonderer80.github.io/2018/04/29/slack%EA%B3%BC-%EC%98%A4%ED%94%88%EC%BB%A4%EB%AE%A4%EB%8B%88%EC%BC%80%EC%9D%B4%EC%85%98/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "slack과 오픈커뮤니케이션"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://wonderland-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:wonderv@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%98%A4%ED%94%88-%EC%BB%A4%EB%AE%A4%EB%8B%88%EC%BC%80%EC%9D%B4%EC%85%98-%EB%8F%84%EA%B5%AC%EB%A1%9C%EC%84%9C%EC%9D%98-%EC%8A%AC%EB%9E%99"><span class="toc-number">1.</span> <span class="toc-text">오픈 커뮤니케이션 도구로서의 슬랙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8B%A4%EB%A5%B8-%EC%82%AC%EB%9E%8C%EC%97%90%EA%B2%8C-%EB%94%B4%EC%A7%80%EB%A5%BC-%EA%B1%B8-%EC%88%98-%EC%9E%88%EB%8A%94%EA%B0%80"><span class="toc-number">2.</span> <span class="toc-text">다른 사람에게 딴지를 걸 수 있는가?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%9E%98-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B3%A0-%EC%93%B0%EB%8A%94-%EA%B2%83%EC%9D%B4-%ED%95%84%EC%9A%94%ED%95%98%EB%8B%A4"><span class="toc-number">3.</span> <span class="toc-text">잘 이해하고 쓰는 것이 필요하다</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 14 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2022 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/13</span><a class="archive-post-title" href= "/2022/04/13/%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0-%EA%B0%9C%EC%84%A0%ED%95%B4%EB%82%98%EA%B0%80%EA%B8%B0/" >코드 리뷰 개선해나기기</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2022/02/09/%EC%9A%B0%EB%A6%B0-%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%9E%98%ED%95%98%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C/" >우린 코드리뷰 잘하고 있을까?</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2021/11/10/%EC%8B%9C%EB%8B%88%EC%96%B4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EC%84%A0%ED%83%9D%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%A6%AC%EB%8D%94-%ED%8F%AC%EC%A7%80%EC%85%98/" >시니어 개발자가 선택할 수 있는 리더 포지션</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2021/10/13/%EA%B2%BD%EC%9F%81%EB%A0%A5%EC%9E%88%EB%8A%94-%EC%8B%9C%EB%8B%88%EC%96%B4%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C-%EC%84%B1%EC%9E%A5%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/" >경쟁력있는 시니어 개발자로 성장하는 방법</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/14</span><a class="archive-post-title" href= "/2021/07/14/%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%EC%9D%98-%EC%83%9D%EC%82%B0%EC%84%B1%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B8%A1%EC%A0%95%ED%95%98%EB%82%98/" >엔지니어링의 생산성은 어떻게 측정하나?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/23</span><a class="archive-post-title" href= "/2021/06/23/%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%84%EB%AC%B4%EB%A6%AC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%A4%EB%A0%A5%EC%9D%B4-%EB%8A%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >당신이 아무리 공부해도 개발 실력이 늘지 않는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2021/05/12/IT%EA%B8%B0%EC%97%85%EC%9D%98-6%EA%B0%80%EC%A7%80-%EB%AC%B8%ED%99%94%ED%8C%A8%ED%84%B4/" >IT기업의 6가지 문화패턴</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/14</span><a class="archive-post-title" href= "/2021/04/14/%ED%92%88%EC%A7%88%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >소프트웨어 품질이란 무엇일까?</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/2018/04/29/slack%EA%B3%BC-%EC%98%A4%ED%94%88%EC%BB%A4%EB%AE%A4%EB%8B%88%EC%BC%80%EC%9D%B4%EC%85%98/" >slack과 오픈커뮤니케이션</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2018/04/12/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98/" >개발자 채용 어떻게 해야하나?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2018/04/10/%ED%8B%B0%EB%B9%84%EB%A5%BC-%EB%B3%B4%EB%A9%B0-%EC%BD%94%EB%94%A9%ED%95%98%EB%A9%B4-%EC%95%88%EB%90%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >티비를 보며 코딩하면 안되는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/04</span><a class="archive-post-title" href= "/2018/04/04/%EC%B4%88%EB%B3%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%97%86%EC%9D%B4-TDD-%EB%B0%B0%EC%9A%B0%EA%B8%B0/" >초보를 위한 테스트 코드 없이 TDD 배우기</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/03</span><a class="archive-post-title" href= "/2018/04/03/%EB%8B%B9%EC%8B%A0%EC%9D%B4-TDD%EC%97%90-%EC%8B%A4%ED%8C%A8%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >당신이 TDD에 실패하는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2018/03/29/%EA%B8%B0%EC%88%A0-%EA%B8%B0%EB%B0%98-%ED%9A%8C%EC%82%AC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >기술 기반 회사란 무엇일까?</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="IT생각"><span class="iconfont-archer">&#xe606;</span>IT생각</span>
+    
+        <span class="sidebar-tag-name" data-tags="개발문화"><span class="iconfont-archer">&#xe606;</span>개발문화</span>
+    
+        <span class="sidebar-tag-name" data-tags="커리어"><span class="iconfont-archer">&#xe606;</span>커리어</span>
+    
+        <span class="sidebar-tag-name" data-tags="TDD"><span class="iconfont-archer">&#xe606;</span>TDD</span>
+    
+        <span class="sidebar-tag-name" data-tags="생산성"><span class="iconfont-archer">&#xe606;</span>생산성</span>
+    
+        <span class="sidebar-tag-name" data-tags="코드리뷰"><span class="iconfont-archer">&#xe606;</span>코드리뷰</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: 'wonderer'
+    }
+</script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+    </body>
+</html>
+
+
