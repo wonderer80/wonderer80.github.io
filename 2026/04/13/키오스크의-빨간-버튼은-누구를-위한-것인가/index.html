@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <meta name="description" content="소프트웨어 개발에 대한 생각과 소개">
+    <title>키오스크의 빨간 버튼은 누구를 위한 것인가 · wonderland</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        
+    <link rel="icon" href= /assets/favicon.ico>
+    <script>
+        (function (w) {
+            "use strict";
+            // rel=preload support test
+            if (!w.loadCSS) {
+                w.loadCSS = function () { };
+            }
+            // define on the loadCSS obj
+            var rp = loadCSS.relpreload = {};
+            // rel=preload feature support test
+            // runs once and returns a function for compat purposes
+            rp.support = (function () {
+                var ret;
+                try {
+                    ret = w.document.createElement("link").relList.supports("preload");
+                } catch (e) {
+                    ret = false;
+                }
+                return function () {
+                    return ret;
+                };
+            })();
+
+            // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+            // then change that media back to its intended value on load
+            rp.bindMediaToggle = function (link) {
+                // remember existing media attr for ultimate state, or default to 'all'
+                var finalMedia = link.media || "all";
+
+                function enableStylesheet() {
+                    link.media = finalMedia;
+                }
+
+                // bind load handlers to enable media
+                if (link.addEventListener) {
+                    link.addEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.attachEvent("onload", enableStylesheet);
+                }
+
+                // Set rel and non-applicable media type to start an async request
+                // note: timeout allows this to happen async to let rendering continue in IE
+                setTimeout(function () {
+                    link.rel = "stylesheet";
+                    link.media = "only x";
+                });
+                // also enable media after 3 seconds,
+                // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                setTimeout(enableStylesheet, 3000);
+            };
+
+            // loop through link elements in DOM
+            rp.poly = function () {
+                // double check this to prevent external calls from running
+                if (rp.support()) {
+                    return;
+                }
+                var links = w.document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    // qualify links to those with rel=preload and as=style attrs
+                    if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                        // prevent rerunning on link
+                        link.setAttribute("data-loadcss", true);
+                        // bind listeners to toggle media back
+                        rp.bindMediaToggle(link);
+                    }
+                }
+            };
+
+            // if unsupported, run the polyfill
+            if (!rp.support()) {
+                // run once at least
+                rp.poly();
+
+                // rerun poly on an interval until onload
+                var run = w.setInterval(rp.poly, 500);
+                if (w.addEventListener) {
+                    w.addEventListener("load", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                } else if (w.attachEvent) {
+                    w.attachEvent("onload", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                }
+            }
+            // commonjs
+            if (typeof exports !== "undefined") {
+                exports.loadCSS = loadCSS;
+            }
+            else {
+                w.loadCSS = loadCSS;
+            }
+        }(typeof global !== "undefined" ? global : this));
+    </script>
+    <script src="//code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="wonderland" type="application/atom+xml">
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >wonderland</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">키오스크의 빨간 버튼은 누구를 위한 것인가</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>wonderland</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            키오스크의 빨간 버튼은 누구를 위한 것인가
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "UX">UX</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "UI">UI</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "키오스크">키오스크</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "디자인">디자인</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2026/04/13</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
+        
+    </div>
+</div>
+        <script>
+  // load webfont-loader async, and add callback function
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+  
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+      if (postIntroTags) {
+        postIntroTags.classList.add('post-fade-in');
+      }
+      if (postIntroMeat) {
+        postIntroMeat.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>최근 한 커피숍의 키오스크를 사용하면서 묘한 불쾌함을 느꼈다. 처음에는 그냥 UI가 촌스럽고 복잡하다고 생각했다. 그런데 몇 번의 선택 화면을 지나면서 묘한 공통점이 보였다. 눈에 더 잘 띄는 빨간색 버튼이 반복적으로 사용자보다 점주에게 유리한 쪽을 가리키고 있다는 점이었다. 그리고 그 의도가 지나치게 노골적으로 느껴졌다. 이 화면은 내가 이용하고 있지만 나를 돕기 위해 설계된 것이 아니라 의도적으로 점주를 위해 내 선택을 교묘하게 유도하는 것처럼 느껴졌다.</p>
+<p>예를 들면 아래 세 장면이 그랬다.</p>
+<div style="margin:1.5rem 0 2rem;">
+  <figure style="max-width:28rem; margin:0 auto 1.25rem; padding:0.9rem 0.9rem 0.8rem; background:#fafafa; border:1px solid rgba(0,0,0,0.08); border-radius:0.7rem; box-shadow:0 10px 24px rgba(0,0,0,0.06);">
+    <img src="/images/kiosk-red-button-1-crop.jpg" alt="포인트 적립 여부를 묻는 키오스크 화면" style="display:block; width:100%; margin:0; border-radius:0.45rem; box-shadow:none;" />
+    <figcaption style="margin-top:0.7rem; font-size:0.95rem; line-height:1.7; color:#6a737b;"><strong style="color:#2f363d;">포인트 적립 화면</strong>에서는 적립하지 않는 쪽이 더 강하게 보였다.</figcaption>
+  </figure>
+
+  <figure style="max-width:28rem; margin:0 auto 1.25rem; padding:0.9rem 0.9rem 0.8rem; background:#fafafa; border:1px solid rgba(0,0,0,0.08); border-radius:0.7rem; box-shadow:0 10px 24px rgba(0,0,0,0.06);">
+    <img src="/images/kiosk-red-button-2-crop.jpg" alt="포인트 사용 여부를 묻는 키오스크 화면" style="display:block; width:100%; margin:0; border-radius:0.45rem; box-shadow:none;" />
+    <figcaption style="margin-top:0.7rem; font-size:0.95rem; line-height:1.7; color:#6a737b;"><strong style="color:#2f363d;">포인트 사용 화면</strong>에서도 마찬가지였다. 포인트를 쓰는 것보다 적립으로 넘어가게 만드는 쪽이 더 강하게 보였다.</figcaption>
+  </figure>
+
+  <figure style="max-width:28rem; margin:0 auto; padding:0.9rem 0.9rem 0.8rem; background:#fafafa; border:1px solid rgba(0,0,0,0.08); border-radius:0.7rem; box-shadow:0 10px 24px rgba(0,0,0,0.06);">
+    <img src="/images/kiosk-red-button-4-crop.jpg" alt="영수증 출력 여부를 묻는 키오스크 화면" style="display:block; width:100%; margin:0; border-radius:0.45rem; box-shadow:none;" />
+    <figcaption style="margin-top:0.7rem; font-size:0.95rem; line-height:1.7; color:#6a737b;"><strong style="color:#2f363d;">영수증 출력 화면</strong>에서도 출력보다 미출력 쪽이 더 강조되어 있었다.</figcaption>
+  </figure>
+</div>
+
+<p>각 장면만 따로 보면 사소한 디자인 선택처럼 보일 수도 있다. 하지만 이 선택들이 이어지는 흐름 전체를 놓고 보면 이것은 단순한 우연이라기보다 하나의 방향처럼 느껴진다. 소모품 비용이 들지 않는 선택, 추가 혜택이 발생하지 않는 선택, 점주 입장에서 운영 비용이 덜 드는 선택이 반복해서 더 눈에 띄게 제시되고 있기 때문이다.</p>
+<p>물론 여기서 한 가지 흥미로운 질문이 생긴다. 이게 정말 나쁜 일일까?</p>
+<p>생각해보면 키오스크 제조사의 직접 고객은 사용자가 아니라 점주다. 그렇다면 점주에게 유리한 UI를 설계하려는 유인은 충분히 자연스럽다. 영수증 미출력을 기본 흐름에 가깝게 만들고, 운영 비용이 덜 드는 선택을 선호하는 것 자체를 무조건 비난하기는 어렵다. 비즈니스적으로 보면 오히려 꽤 합리적인 선택일 수도 있다.</p>
+<p>여기서 더 흥미로운 건, 이 매장이 포인트 시스템 자체를 없앤 것은 아니라는 점이다. 만약 정말 포인트 적립이나 사용을 원하지 않는다면 애초에 그런 제도를 넣지 않으면 된다. 그런데 현실은 그렇지 않다. 포인트 시스템은 고객 재방문을 유도하고, 회원을 확보하고, 데이터를 수집하는 데 여전히 유용하다. 즉 제도는 필요하다.</p>
+<p>문제는 그 다음이다. 제도는 유지하고 싶지만, 실제 적립이나 사용은 너무 활발하지 않기를 바라는 마음 역시 존재하는 것처럼 보인다. 고객을 끌어오기 위해서는 포인트가 필요하지만, 막상 포인트가 적립되고 사용되는 순간 그것은 비용이 된다. 이 모순은 종종 정책 문서가 아니라 UI에서 먼저 드러난다. 기능은 제공하지만, 그 기능이 충분히 사용되지는 않기를 바라는 태도 말이다.</p>
+<p>점주에게 유리한 설계와 사용자를 희생시키는 설계는 같은 말이 아니다.</p>
+<p>내가 보기에 사용자를 희생시키는 순간은, 사용자가 자기 이익에 따라 충분히 판단할 수 있도록 돕는 대신 특정 선택을 더 쉽게 누르게 만드는 시점부터다. 특히 키오스크처럼 빨리 결제하고 지나가고 싶은 상황에서는 사람은 문구를 꼼꼼히 읽기보다 가장 눈에 띄는 버튼을 누르기 쉽다. 뒤에 사람이 서 있거나 주문 과정이 길어질수록 더 그렇다. 이때 시각적 강조가 반복적으로 점주에게 유리한 방향을 가리킨다면, 선택권은 남아 있어도 선택의 질은 훼손된다.</p>
+<p>여기서 떠오른 대비 사례가 있다. 예전에 한 서비스의 약관 동의 화면을 보고 꽤 인상 깊었던 적이 있다. 보통 많은 서비스들은 전체 동의를 누르면 마케팅 수신 동의까지 자연스럽게 따라오게 설계한다. 기업 입장에서는 당연히 그 편이 이익이기 때문이다. 그런데 그 서비스는 전체 동의의 편의는 제공하면서도, 마케팅 수신 동의는 거기서 제외했다. 필수적인 동의는 빠르게 처리하게 도와주되, 기업에게 이익이 되는 선택까지 관성적으로 따라가게 만들지는 않았던 것이다.</p>
+<p>이 차이는 꽤 중요하다. 둘 다 기업의 이해관계 안에서 설계된 UI이지만, 하나는 사용자의 편의를 도우면서도 선택을 오염시키지 않았고, 다른 하나는 편의를 가장해 특정 선택을 더 쉽게 누르게 만든다.</p>
+<p>좋은 UX는 기업의 목표와 사용자 경험이 충돌하지 않도록 설계된 UX다. 기업의 목표를 앞세워 사용자의 판단을 비틀기 시작하면, 그건 좋은 UX가 아니라 조작에 가까워진다. 점주에게 유리한 흐름을 만드는 것 자체는 이해할 수 있다. 하지만 그 과정에서 사용자가 받을 수 있는 혜택을 놓치게 하거나, 사용자의 판단이 운영자의 이익 쪽으로 기울도록 유도한다면 그건 친절한 UI가 아니라 편향된 UI다.</p>
+<p>키오스크 UI는 종종 기술의 문제가 아니라 태도의 문제를 드러낸다. 이 인터페이스가 누구를 먼저 고객으로 대하는지, 누구의 시간과 비용을 더 소중하게 여기는지는 생각보다 쉽게 감춰지지 않는다. 그런 태도는 결국 버튼의 크기, 문구의 순서, 그리고 색 하나에까지 스며든다.</p>
+<p>그래서 내가 이 키오스크에서 불쾌했던 이유는 단순히 복잡해서가 아니다. 이 빨간 버튼이 중요한 선택을 알려주는 표시가 아니라, 사용자의 판단을 아주 조금씩 운영자의 이익 쪽으로 밀어두는 신호처럼 느껴졌기 때문이다. 문제는 버튼이 빨갛다는 데 있지 않다. 그 빨간색이 누구를 위해 쓰이고 있었느냐에 있다.</p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="previous">
+          
+              <div class="prevSlogan">Previous Post</div>
+              <a href= "/2022/04/13/%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0-%EA%B0%9C%EC%84%A0%ED%95%B4%EB%82%98%EA%B0%80%EA%B8%B0/" title= 코드 리뷰 개선해나기기 >
+                  <div class="prevTitle">코드 리뷰 개선해나기기</div>
+              </a>
+          
+        </li>
+        <li class="next">
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = "https://wonderer80.github.io/2026/04/13/%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC%EC%9D%98-%EB%B9%A8%EA%B0%84-%EB%B2%84%ED%8A%BC%EC%9D%80-%EB%88%84%EA%B5%AC%EB%A5%BC-%EC%9C%84%ED%95%9C-%EA%B2%83%EC%9D%B8%EA%B0%80/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "키오스크의 빨간 버튼은 누구를 위한 것인가"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://wonderland-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:wonderv@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 15 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2026 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/13</span><a class="archive-post-title" href= "/2026/04/13/%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC%EC%9D%98-%EB%B9%A8%EA%B0%84-%EB%B2%84%ED%8A%BC%EC%9D%80-%EB%88%84%EA%B5%AC%EB%A5%BC-%EC%9C%84%ED%95%9C-%EA%B2%83%EC%9D%B8%EA%B0%80/" >키오스크의 빨간 버튼은 누구를 위한 것인가</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2022 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/13</span><a class="archive-post-title" href= "/2022/04/13/%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0-%EA%B0%9C%EC%84%A0%ED%95%B4%EB%82%98%EA%B0%80%EA%B8%B0/" >코드 리뷰 개선해나기기</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2022/02/09/%EC%9A%B0%EB%A6%B0-%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%9E%98%ED%95%98%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C/" >우린 코드리뷰 잘하고 있을까?</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2021/11/10/%EC%8B%9C%EB%8B%88%EC%96%B4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EC%84%A0%ED%83%9D%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%A6%AC%EB%8D%94-%ED%8F%AC%EC%A7%80%EC%85%98/" >시니어 개발자가 선택할 수 있는 리더 포지션</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2021/10/13/%EA%B2%BD%EC%9F%81%EB%A0%A5%EC%9E%88%EB%8A%94-%EC%8B%9C%EB%8B%88%EC%96%B4%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C-%EC%84%B1%EC%9E%A5%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/" >경쟁력있는 시니어 개발자로 성장하는 방법</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/14</span><a class="archive-post-title" href= "/2021/07/14/%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%EC%9D%98-%EC%83%9D%EC%82%B0%EC%84%B1%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B8%A1%EC%A0%95%ED%95%98%EB%82%98/" >엔지니어링의 생산성은 어떻게 측정하나?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/23</span><a class="archive-post-title" href= "/2021/06/23/%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%84%EB%AC%B4%EB%A6%AC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%A4%EB%A0%A5%EC%9D%B4-%EB%8A%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >당신이 아무리 공부해도 개발 실력이 늘지 않는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2021/05/12/IT%EA%B8%B0%EC%97%85%EC%9D%98-6%EA%B0%80%EC%A7%80-%EB%AC%B8%ED%99%94%ED%8C%A8%ED%84%B4/" >IT기업의 6가지 문화패턴</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/14</span><a class="archive-post-title" href= "/2021/04/14/%ED%92%88%EC%A7%88%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >소프트웨어 품질이란 무엇일까?</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/2018/04/29/slack%EA%B3%BC-%EC%98%A4%ED%94%88%EC%BB%A4%EB%AE%A4%EB%8B%88%EC%BC%80%EC%9D%B4%EC%85%98/" >slack과 오픈커뮤니케이션</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2018/04/12/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98/" >개발자 채용 어떻게 해야하나?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2018/04/10/%ED%8B%B0%EB%B9%84%EB%A5%BC-%EB%B3%B4%EB%A9%B0-%EC%BD%94%EB%94%A9%ED%95%98%EB%A9%B4-%EC%95%88%EB%90%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >티비를 보며 코딩하면 안되는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/04</span><a class="archive-post-title" href= "/2018/04/04/%EC%B4%88%EB%B3%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%97%86%EC%9D%B4-TDD-%EB%B0%B0%EC%9A%B0%EA%B8%B0/" >초보를 위한 테스트 코드 없이 TDD 배우기</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/03</span><a class="archive-post-title" href= "/2018/04/03/%EB%8B%B9%EC%8B%A0%EC%9D%B4-TDD%EC%97%90-%EC%8B%A4%ED%8C%A8%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >당신이 TDD에 실패하는 이유</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2018/03/29/%EA%B8%B0%EC%88%A0-%EA%B8%B0%EB%B0%98-%ED%9A%8C%EC%82%AC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >기술 기반 회사란 무엇일까?</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="IT생각"><span class="iconfont-archer">&#xe606;</span>IT생각</span>
+    
+        <span class="sidebar-tag-name" data-tags="개발문화"><span class="iconfont-archer">&#xe606;</span>개발문화</span>
+    
+        <span class="sidebar-tag-name" data-tags="커리어"><span class="iconfont-archer">&#xe606;</span>커리어</span>
+    
+        <span class="sidebar-tag-name" data-tags="TDD"><span class="iconfont-archer">&#xe606;</span>TDD</span>
+    
+        <span class="sidebar-tag-name" data-tags="생산성"><span class="iconfont-archer">&#xe606;</span>생산성</span>
+    
+        <span class="sidebar-tag-name" data-tags="코드리뷰"><span class="iconfont-archer">&#xe606;</span>코드리뷰</span>
+    
+        <span class="sidebar-tag-name" data-tags="UX"><span class="iconfont-archer">&#xe606;</span>UX</span>
+    
+        <span class="sidebar-tag-name" data-tags="UI"><span class="iconfont-archer">&#xe606;</span>UI</span>
+    
+        <span class="sidebar-tag-name" data-tags="키오스크"><span class="iconfont-archer">&#xe606;</span>키오스크</span>
+    
+        <span class="sidebar-tag-name" data-tags="디자인"><span class="iconfont-archer">&#xe606;</span>디자인</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: 'wonderer'
+    }
+</script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+    </body>
+</html>
+
+
