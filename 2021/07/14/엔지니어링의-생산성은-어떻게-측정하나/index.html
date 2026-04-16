@@ -359,7 +359,7 @@ height:50vh;
         <p>필자가 다니고 있는 회사는 소위 매트릭스 조직으로 운영을 하고 있다. 개발자는 교차 기능팀(Cross-functional Team)에서 공동의 목표를 가지고 가설과 실험을 통해 신규 기능 개발을 하거나 기존 기능의 개선 업무를 수행하거나 기능팀(Functional Team)에서 개발자들의 생산성 향상을 위한 레거시 개선 및 개발 환경 개선을 위한 업무를 수행할 수 있다. </p>
 <p>대부분의 IT기업에서 개발자는 한정적이고 하고 싶은 혹은 해야만 하는 일들은 많기 때문에 어떤 일을 우선적으로 해야 하는지에 대한 가치 판단 및 우선순위 설정은 매우 중요하다. 교차 기능팀의 경우 서비스의 가치를 높이는 것이 주요한 목표이므로 최근 많은 스타트업들이 사용자 데이터에 기반하여 가설을 세우고 사람들의 반응을 살펴보며 방향성을 잡거나 우선순위를 매긴다. 그럼 생산성 향상을 목표로 해야 하는 경우에는 어떤 방식으로 우선순위를 설정해야 할까? 고민을 하던 중 최근 <a target="_blank" rel="noopener" href="https://abseil.io/resources/swe_at_google.2.pdf">Software Engineering at Google</a> 에서 ‘Measuring Engineering Productivity’ 라는 챕터의 내용을 보며 들었던 생각을 책의 내용과 함께 적어보고자 한다.</p>
 <h1 id="생산성을-꼭-측정해야-하는가"><a href="#생산성을-꼭-측정해야-하는가" class="headerlink" title="생산성을 꼭 측정해야 하는가?"></a>생산성을 꼭 측정해야 하는가?</h1><p>어떤 작업으로 인해 향상되는 생산성을 어떻게 측정해야 하는지를 이야기하기 전에 매우 중요한 질문이다. 왜냐하면, 생산성을 측정하는 것은 측정하는 것 자체에도 많은 비용이 들어가기 때문에 생산성을 측정함으로 인해 얻을 수 있는 가치에 대해 생각해봐야 한다. 또한 측정한 결과가 긍정적이든 부정적이든 그 결과에 따른 행동이나 결정에 변화가 없다면 측정할 가치가 없을 가능성이 높다.</p>
-<h1 id="생산성을-어떻게-측정할-것인가"><a href="#생산성을-어떻게-측정할-것인가" class="headerlink" title="생산성을 어떻게 측정할 것인가?"></a>생산성을 어떻게 측정할 것인가?</h1><p>과거에는 정해진 시간 안에 얼마나 많은 코드를 생산했는지(LOC)를 판단하던 시기도 있었지만, 최근엔 아무도 코드의 라인수를 통해서 생산성을 측정하려 하지 않을 것이다. 그렇다면 구글에서는 어떤 방식을 사용했을까? 구글에서는 GSM(Goals/Signals/Metrics) Framework를 이용한다고 한다. 개인적으로 요즘 많은 스타트업이 도입하고 있는 OKR과 비슷한 관점이라는 생각이 든다. GSM 이 어떤 것인지 더 알아보자.</p>
+<h1 id="생산성을-어떻게-측정할-것인가"><a href="#생산성을-어떻게-측정할-것인가" class="headerlink" title="생산성을 어떻게 측정할 것인가?"></a>생산성을 어떻게 측정할 것인가?</h1><p>과거에는 정해진 시간 안에 얼마나 많은 코드를 생산했는지(LOC)를 판단하던 시기도 있었지만, 최근엔 아무도 코드의 라인수를 통해서 생산성을 측정하려 하지 않을 것이다. 그렇다면 구글에서는 어떤 방식을 사용했을까? 구글에서는 GSM(Goals&#x2F;Signals&#x2F;Metrics) Framework를 이용한다고 한다. 개인적으로 요즘 많은 스타트업이 도입하고 있는 OKR과 비슷한 관점이라는 생각이 든다. GSM 이 어떤 것인지 더 알아보자.</p>
 <h2 id="목표-Goals"><a href="#목표-Goals" class="headerlink" title="목표(Goals)"></a>목표(Goals)</h2><p>목표는 그 자체로는 측정할 수 없지만 모든 사람이 동의하는 것이여야 한다고 한다. 다만 생산성에 영향을 끼치는 요소는 다양하고 하나의 요소를 향상시키는 작업이 다른 요소는 저하시키는 상황이 벌어질 수 있기 때문에 구글에서는 “QUANTS” 라고 하는 다섯 가지의 요소로 분류하여 판단한다고 한다.(특성에 따라 해당하지 않는 항목이 있을 수도 있다고 한다)</p>
 <h3 id="Quality-of-the-code-코드의-품질"><a href="#Quality-of-the-code-코드의-품질" class="headerlink" title="Quality of the code(코드의 품질)"></a>Quality of the code(코드의 품질)</h3><p>이 작업을 통해서 코드의 품질이 개선되는지를 의미한다.</p>
 <h3 id="Attention-from-engineers-엔지니어의-집중"><a href="#Attention-from-engineers-엔지니어의-집중" class="headerlink" title="Attention from engineers(엔지니어의 집중)"></a>Attention from engineers(엔지니어의 집중)</h3><p>엔지니어들의 집중도를 향상시키는지 혹은 산만하게 만드는지를 의미한다.</p>
@@ -684,7 +684,18 @@ top:50vh;
     
     
     
-    <div class="total-archive"> Total : 15 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 16 </div>
     
     <div class="post-archive">
     
@@ -693,6 +704,11 @@ top:50vh;
     
     <div class="archive-year"> 2026 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/17</span><a class="archive-post-title" href= "/2026/04/17/AI-%EC%8B%9C%EB%8C%80-%EB%8D%94-%EC%84%A0%EB%AA%85%ED%95%B4%EC%A7%84-%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EC%9D%98-%EB%B3%B8%EC%A7%88/" >AI 시대, 더 선명해진 소프트웨어의 본질</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -801,13 +817,21 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="AI"><span class="iconfont-archer">&#xe606;</span>AI</span>
+    
+        <span class="sidebar-tag-name" data-tags="소프트웨어"><span class="iconfont-archer">&#xe606;</span>소프트웨어</span>
+    
+        <span class="sidebar-tag-name" data-tags="개발"><span class="iconfont-archer">&#xe606;</span>개발</span>
+    
+        <span class="sidebar-tag-name" data-tags="생각"><span class="iconfont-archer">&#xe606;</span>생각</span>
+    
         <span class="sidebar-tag-name" data-tags="IT생각"><span class="iconfont-archer">&#xe606;</span>IT생각</span>
     
         <span class="sidebar-tag-name" data-tags="개발문화"><span class="iconfont-archer">&#xe606;</span>개발문화</span>
     
-        <span class="sidebar-tag-name" data-tags="커리어"><span class="iconfont-archer">&#xe606;</span>커리어</span>
-    
         <span class="sidebar-tag-name" data-tags="TDD"><span class="iconfont-archer">&#xe606;</span>TDD</span>
+    
+        <span class="sidebar-tag-name" data-tags="커리어"><span class="iconfont-archer">&#xe606;</span>커리어</span>
     
         <span class="sidebar-tag-name" data-tags="생산성"><span class="iconfont-archer">&#xe606;</span>생산성</span>
     

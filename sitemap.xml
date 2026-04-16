@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wonderer80.github.io/2026/04/17/AI-%EC%8B%9C%EB%8C%80-%EB%8D%94-%EC%84%A0%EB%AA%85%ED%95%B4%EC%A7%84-%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EC%9D%98-%EB%B3%B8%EC%A7%88/</loc>
+    
+    <lastmod>2026-04-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wonderer80.github.io/2026/04/13/%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC%EC%9D%98-%EB%B9%A8%EA%B0%84-%EB%B2%84%ED%8A%BC%EC%9D%80-%EB%88%84%EA%B5%AC%EB%A5%BC-%EC%9C%84%ED%95%9C-%EA%B2%83%EC%9D%B8%EA%B0%80/</loc>
     
     <lastmod>2026-04-13</lastmod>
@@ -56,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://wonderer80.github.io/2021/06/23/%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%84%EB%AC%B4%EB%A6%AC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%A4%EB%A0%A5%EC%9D%B4-%EB%8A%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9D%B4%EC%9C%A0/</loc>
+    <loc>https://wonderer80.github.io/2021/11/10/%EC%8B%9C%EB%8B%88%EC%96%B4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EC%84%A0%ED%83%9D%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%A6%AC%EB%8D%94-%ED%8F%AC%EC%A7%80%EC%85%98/</loc>
     
     <lastmod>2026-04-13</lastmod>
     
@@ -65,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://wonderer80.github.io/2021/11/10/%EC%8B%9C%EB%8B%88%EC%96%B4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EC%84%A0%ED%83%9D%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%A6%AC%EB%8D%94-%ED%8F%AC%EC%A7%80%EC%85%98/</loc>
+    <loc>https://wonderer80.github.io/2021/06/23/%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%84%EB%AC%B4%EB%A6%AC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%A4%EB%A0%A5%EC%9D%B4-%EB%8A%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9D%B4%EC%9C%A0/</loc>
     
     <lastmod>2026-04-13</lastmod>
     
@@ -110,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://wonderer80.github.io/2021/10/13/%EA%B2%BD%EC%9F%81%EB%A0%A5%EC%9E%88%EB%8A%94-%EC%8B%9C%EB%8B%88%EC%96%B4%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C-%EC%84%B1%EC%9E%A5%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/</loc>
+    <loc>https://wonderer80.github.io/2018/03/29/%EA%B8%B0%EC%88%A0-%EA%B8%B0%EB%B0%98-%ED%9A%8C%EC%82%AC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</loc>
     
     <lastmod>2026-04-13</lastmod>
     
@@ -119,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://wonderer80.github.io/2018/03/29/%EA%B8%B0%EC%88%A0-%EA%B8%B0%EB%B0%98-%ED%9A%8C%EC%82%AC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</loc>
+    <loc>https://wonderer80.github.io/2021/10/13/%EA%B2%BD%EC%9F%81%EB%A0%A5%EC%9E%88%EB%8A%94-%EC%8B%9C%EB%8B%88%EC%96%B4%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C-%EC%84%B1%EC%9E%A5%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/</loc>
     
     <lastmod>2026-04-13</lastmod>
     
@@ -148,78 +157,106 @@
 
   <url>
     <loc>https://wonderer80.github.io/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
+    <loc>https://wonderer80.github.io/tags/AI/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://wonderer80.github.io/tags/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://wonderer80.github.io/tags/%EA%B0%9C%EB%B0%9C/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://wonderer80.github.io/tags/%EC%83%9D%EA%B0%81/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://wonderer80.github.io/tags/IT%EC%83%9D%EA%B0%81/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wonderer80.github.io/tags/%EA%B0%9C%EB%B0%9C%EB%AC%B8%ED%99%94/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://wonderer80.github.io/tags/%EC%BB%A4%EB%A6%AC%EC%96%B4/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wonderer80.github.io/tags/TDD/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://wonderer80.github.io/tags/%EC%BB%A4%EB%A6%AC%EC%96%B4/</loc>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wonderer80.github.io/tags/%EC%83%9D%EC%82%B0%EC%84%B1/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wonderer80.github.io/tags/%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wonderer80.github.io/tags/UX/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wonderer80.github.io/tags/UI/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wonderer80.github.io/tags/%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wonderer80.github.io/tags/%EB%94%94%EC%9E%90%EC%9D%B8/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="소프트웨어 개발에 대한 생각과 소개">
-    <title>wonderland</title>
+    <title>AI 시대, 더 선명해진 소프트웨어의 본질 · wonderland</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -174,12 +176,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >wonderland</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">AI 시대, 더 선명해진 소프트웨어의 본질</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>wonderland</a>
 </header>
@@ -193,24 +206,73 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            AI 시대, 더 선명해진 소프트웨어의 본질
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "AI">AI</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "소프트웨어">소프트웨어</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "개발">개발</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "생각">생각</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2026/04/17</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -294,181 +356,82 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="AI-시대의-불안-앞에서"><a href="#AI-시대의-불안-앞에서" class="headerlink" title="AI 시대의 불안 앞에서"></a>AI 시대의 불안 앞에서</h2><p>요즘 AI 이야기를 하다 보면 주변에서 뒤처지는 것 같다는 불안을 자주 듣게 된다. 새로운 도구와 새로운 방식이 쏟아지고, 이제 누구나 개발할 수 있는 시대가 오는 것처럼 이야기된다. 특히 기존 엔지니어일수록 이런 변화 앞에서 더 불안해하기 쉬운 것 같다.</p>
+<p>나 역시 비슷한 고민을 했다. 이제 누구나 개발할 수 있는 시대라면 소프트웨어 엔지니어는 어떤 역할을 해야 할까. 무엇을 더 잘해야 하고, 무엇을 버려야 하며, 우리는 얼마나 달라져야 할까.</p>
+<p>겉으로 보면 정말 많은 것이 바뀌고 있다. 예전에는 구현 자체가 큰 장벽이었다. 특히 현실의 개발은 새 기능만 만드는 일이 아니었다. 이미 돌아가고 있는 레거시 환경을 운영하고, 문제를 수습하고, 조금씩 개선해가면서 동시에 새로운 기능까지 만들어야 했다. 어려움은 단순히 무언가를 구현하는 데 있다기보다, 복잡한 맥락과 제약이 얽힌 상태에서 계속 앞으로 나아가야 한다는 점에 더 가까웠다. 지금도 그 본질은 크게 다르지 않다. 다만 AI는 코드를 빠르게 만들고 문서를 정리해주면서 여러 작업의 속도를 분명히 높여준다. 그래서 처음에는 이제 훨씬 쉬워지거나 빨라질 것 같다는 기대가 생긴다. 그런데 막상 해보면 생각만큼 쉽지도 않고, 기대한 만큼 빨라지지도 않는 경우가 많다.</p>
+<p>이런 고민을 하면서 여러 글을 읽고 생각을 정리해보니, 내 생각은 오히려 다른 쪽으로 갔다. 바뀐 건 많지만, 그 변화의 상당수는 작업 방식에 가깝다는 쪽이다. 코드를 입력하는 방식, 초안을 만드는 방식, 지식을 찾는 방식은 달라졌지만 소프트웨어를 만드는 일의 중심에는 여전히 크게 변하지 않은 것들이 남아 있다.</p>
+<h2 id="만들기-쉬워질수록-문제에서-멀어진다"><a href="#만들기-쉬워질수록-문제에서-멀어진다" class="headerlink" title="만들기 쉬워질수록 문제에서 멀어진다"></a>만들기 쉬워질수록 문제에서 멀어진다</h2><p>최근에 읽은 <a target="_blank" rel="noopener" href="https://notes.visaint.space/ai-coding-is-gambling/">AI Coding is Gambling</a>이라는 글은 AI 코딩이 마치 프롬프트를 넣고 원하는 결과가 나올 때까지 계속 레버를 당기는 일과 비슷하다고 말한다. 문제를 더 잘 이해해서 앞으로 나아간다기보다, 이번에는 좀 괜찮은 결과가 나오기를 기대하면서 계속 시도하게 된다는 것이다. 이 비유가 흥미로웠던 이유는, AI를 쓰다 보면 문제를 깊이 이해하는 일보다 그럴듯한 결과를 빨리 얻는 쪽으로 쉽게 기울 수 있다는 점을 꽤 잘 보여준다고 느꼈기 때문이다.</p>
+<p>물론 이런 함정이 AI 때문에 새롭게 생긴 것은 아니다. 원래도 사람들은 고객의 문제를 깊이 이해하기보다, 고객이 말한 솔루션을 빠르게 만들어주는 쪽으로 자주 기울곤 했다. 문제를 제대로 이해하다 보면 고객이 처음 말한 방향과 다른 해석이나 다른 해결책이 나올 수 있고, 그러면 그걸 다시 설명하고 설득하는 과정이 필요해진다. 반면 고객이 말한 솔루션을 바로 만드는 쪽은 더 빠르고, 눈에 보이는 결과도 빨리 나온다.</p>
+<p>예전에는 그나마 구현 비용이 커서 함부로 “일단 만들어보자”로 가기 어려웠다. 기능이 정말 필요한지, 어떤 제약이 있는지, 기존 시스템과 어떻게 연결되는지 조금 더 오래 생각할 수밖에 없었다. 하지만 이제는 그 문턱이 훨씬 낮아졌다. 그래서 원래도 하던 실수를 더 쉽게, 더 빠르게 반복하게 된다. 문제의 본질보다 솔루션 생산 자체에 집중하게 되고, 무엇을 왜 만드는가보다 무엇이든 빨리 만들어내는 일이 더 중요해지기 쉽다. 그러면 앞에서 충분히 생각하는 시간은 줄고, 뒤에서는 엉성하게 만들어진 결과물을 수습하는 일만 남는다.</p>
+<h2 id="AI는-사고를-증폭한다"><a href="#AI는-사고를-증폭한다" class="headerlink" title="AI는 사고를 증폭한다"></a>AI는 사고를 증폭한다</h2><p>여기서 1991년에 나온 QSM 1의 서문에서 제럴드 와인버그가 한 말이 떠올랐다.</p>
+<blockquote>
+<p>The computer, I learned, was a mirror of my intelligence, and I wasn’t too impressed by my reflection.<br>Later, when I wrote larger programs in concert with other people, I learned that the computer was not just a mirror, but a magnifying mirror.</p>
+</blockquote>
+<p>와인버그는 컴퓨터가 인간의 사고를 그대로 비추는 데서 그치지 않고, 더 큰 프로젝트에서는 그것을 더 크게 확대해서 드러낸다고 봤다. 이 말이 1991년에 나온 책의 이야기인데도 지금 AI 시대를 설명하는 데 여전히 잘 들어맞는다는 점이 흥미롭다. 결국 AI도 비슷하다. 인간의 사고를 대체하기보다 오히려 증폭한다. 방향이 맞으면 더 멀리 갈 수 있고, 방향이 틀리면 더 빠르게 잘못된 곳으로 간다. 예전에는 생각이 부족하면 결과물도 대체로 허술해서 문제가 비교적 빨리 드러났다. 이제는 생각이 부족해도 겉보기에는 그럴듯한 결과가 빠르게 나오기 때문에, 더 늦게 이상을 알아차리거나 더 큰 비용을 치른 뒤에 문제를 발견하기 쉬워졌다.</p>
+<p>최근에 들은 InfoQ 팟캐스트 <a target="_blank" rel="noopener" href="https://www.infoq.com/podcasts/team-strengths-weaknesses-software-development/">AI Amplifies Team Strengths and Weaknesses in Software Development</a>도 비슷한 이야기를 한다. 많은 팀들이 원래도 명확한 스펙, 공동의 책임감, 빠른 피드백, 협업 같은 기본기에서 어려움을 겪고 있었고, AI는 그런 문제를 대신 해결해주지 않는다는 것이다. 오히려 코드 생성만 빨라지면, 기본기가 좋은 팀은 그 속도를 전체 흐름의 개선으로 이어갈 수 있지만 기본기가 약한 팀은 리뷰, 디버깅, 정렬되지 않은 요구사항 같은 다른 지점에서 병목이 더 크게 드러난다. 그래서 그 팟캐스트는 AI를 cure가 아니라 amplifier라고 부른다. 결국 와인버그의 말과 InfoQ 팟캐스트에서 나온 이야기는 비슷한 방향을 가리키고 있다. AI는 소프트웨어 개발의 새로운 본질을 만드는 것이 아니라, 원래 있던 강점과 약점, 그리고 본질을 더 선명하게 드러낸다.</p>
+<h2 id="소프트웨어의-본질은-여전히-같다"><a href="#소프트웨어의-본질은-여전히-같다" class="headerlink" title="소프트웨어의 본질은 여전히 같다"></a>소프트웨어의 본질은 여전히 같다</h2><p>내가 보기에 소프트웨어의 본질은 여전히 현실을 모델링하는 일이다. 예를 들어 주문, 고객, 재고 같은 개념들이 어떤 관계를 맺고 어떤 상태 변화를 거치는지, 그 사이에 어떤 규칙과 제약이 있는지를 코드로 옮기는 일이다. 이건 단순히 코드를 생성하는 능력만으로 해결되지 않는다. 무엇이 중요한 규칙인지, 어떤 예외가 치명적인지, 어디까지를 시스템이 책임져야 하는지를 이해해야 한다.</p>
+<p>소프트웨어를 만든다는 것은 결국 변화를 다루는 일이기도 하다. 처음 만드는 것보다 더 어려운 것은, 계속 바뀌는 요구사항과 맥락 속에서 시스템을 수정해나가는 일이다. AI는 변경을 고려한 것처럼 보이는 구조를 내놓기도 하지만, 실제 맥락과 맞지 않는 추상화나 오버엔지니어링으로 흐르는 경우도 많다. 결국 어떤 변화를 대비해야 하는지 판단하는 일은 여전히 사람의 몫이다.</p>
+<p>또 실제 현장에서는 코드 자체보다, 무엇을 만들고 있는지에 대한 이해가 더 자주 어긋난다. 어떤 문제를 풀고 있는지, 누가 어떤 제약을 중요하게 보는지를 서로 다르게 이해한 채 개발이 진행되기 때문이다. 이런 상태에서는 코드가 기술적으로 맞더라도, 정작 사용자가 원하는 문제를 풀지 못하거나 팀이 기대한 방향과 다른 결과물이 나오기 쉽다.</p>
+<h2 id="소프트웨어-엔지니어의-본질도-변하지-않는다"><a href="#소프트웨어-엔지니어의-본질도-변하지-않는다" class="headerlink" title="소프트웨어 엔지니어의 본질도 변하지 않는다"></a>소프트웨어 엔지니어의 본질도 변하지 않는다</h2><p>나는 소프트웨어의 본질이 크게 달라지지 않은 것처럼, 소프트웨어 엔지니어의 역할도 생각보다 크게 달라지지 않는다고 생각한다. 여전히 중요한 사람은 코드를 가장 빨리 찍어내는 사람이 아니라, 현실을 정확히 이해하고, 복잡한 상황에서 중요한 것을 구분하고, 무엇을 포기하고 무엇을 지켜야 할지를 끝까지 판단할 수 있는 사람이다.</p>
+<p>AI는 답을 더 빨리 만들어주고 개발의 방식과 속도를 많이 바꾸고 있지만, 무엇이 중요한 문제인지 대신 정해주지는 않는다. 어떤 제약이 진짜 제약인지, 그럴듯한 답과 맞는 답을 어떻게 구분할지, 어떤 구조와 선택이 실제 맥락에 맞는지를 판단하는 책임은 여전히 사람에게 남아 있다. 그래서 나는 AI 시대일수록 불안 그 자체에 휩쓸리기보다, 원래 소프트웨어 엔지니어가 해오던 일의 본질에 더 집중해야 한다고 생각한다. 문제를 정확히 이해하고, 중요한 제약을 구분하고, 끝까지 판단하는 일 말이다.</p>
+<h2 id="참고한-글"><a href="#참고한-글" class="headerlink" title="참고한 글"></a>참고한 글</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://notes.visaint.space/ai-coding-is-gambling/">AI Coding is Gambling</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.com/podcasts/team-strengths-weaknesses-software-development/">AI Amplifies Team Strengths and Weaknesses in Software Development</a></li>
+</ul>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="previous">
+          
+              <div class="prevSlogan">Previous Post</div>
+              <a href= "/2026/04/13/%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC%EC%9D%98-%EB%B9%A8%EA%B0%84-%EB%B2%84%ED%8A%BC%EC%9D%80-%EB%88%84%EA%B5%AC%EB%A5%BC-%EC%9C%84%ED%95%9C-%EA%B2%83%EC%9D%B8%EA%B0%80/" title= 키오스크의 빨간 버튼은 누구를 위한 것인가 >
+                  <div class="prevTitle">키오스크의 빨간 버튼은 누구를 위한 것인가</div>
+              </a>
+          
+        </li>
+        <li class="next">
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = "https://wonderer80.github.io/2026/04/17/AI-%EC%8B%9C%EB%8C%80-%EB%8D%94-%EC%84%A0%EB%AA%85%ED%95%B4%EC%A7%84-%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EC%9D%98-%EB%B3%B8%EC%A7%88/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "AI 시대, 더 선명해진 소프트웨어의 본질"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://wonderland-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
     
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
-        <article class="index-post">
-            <a class="abstract-title" href = "/2021/11/10/%EC%8B%9C%EB%8B%88%EC%96%B4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EC%84%A0%ED%83%9D%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%A6%AC%EB%8D%94-%ED%8F%AC%EC%A7%80%EC%85%98/" >
-                
-                    <span>시니어 개발자가 선택할 수 있는 리더 포지션</span>
-            </a>
-            <div class="abstract-content">
-                왜 리더로 성장해야 하는가?국내에서 개발자로 생활하면서 느꼈던 것은 많은 개발자들이 연차가 쌓이면서 관리자 역할을 하는 것에 대해 두려움을 느낀다는 것이었다. 관리자는 기술직이 아니며 관리자로 일한다는 것은 자신의 개발자로서의 전문성을 발휘하지 못하고 점점 도태된다고 느끼기 때문이다. 그렇기에 많은 개발자들은 자신이 백발이 될 때까지 개발을 하고 싶다는 환상을 가지고 있다. 
-반면 우리가 많은 회사에서 경험한 관리자들은 과거에 개발자였다가 어느 순간 관리자를 맡게 된 사람들이며, 주로 일정 관리나 여러 미팅에 참여하면서 기술적...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/11/10</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "커리어">커리어</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2021/10/13/%EA%B2%BD%EC%9F%81%EB%A0%A5%EC%9E%88%EB%8A%94-%EC%8B%9C%EB%8B%88%EC%96%B4%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C-%EC%84%B1%EC%9E%A5%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/" >
-                
-                    <span>경쟁력있는 시니어 개발자로 성장하는 방법</span>
-            </a>
-            <div class="abstract-content">
-                개발자가 귀한 시대이다. 여러 IT 회사들이 개발자를 모시기 위해 경쟁을 하고 있다.국내에서는 여전히 생소한 용어지만 나름 이름 있는 IT 회사들은 Developer Relations(DevRel) 라고 하는 대외 개발자들을 대상으로 홍보하는 조직을 구성하여 운영하거나 최소한 HR팀에서 개발자 채용이나 홍보 등을 전담으로 하는 경우도 많이 있다. 필자도 얼마전 T사에서 근무하는 지인이 개발자 채용에 관련해서 조언을 구하기도 했다.
-하지만 이 역시 빈익빈부익부 현상이 존재한다. 과거에는 영세한 IT 회사들이 돈이 없다보니 오히려...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/10/13</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "커리어">커리어</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2021/07/14/%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81%EC%9D%98-%EC%83%9D%EC%82%B0%EC%84%B1%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B8%A1%EC%A0%95%ED%95%98%EB%82%98/" >
-                
-                    <span>엔지니어링의 생산성은 어떻게 측정하나?</span>
-            </a>
-            <div class="abstract-content">
-                필자가 다니고 있는 회사는 소위 매트릭스 조직으로 운영을 하고 있다. 개발자는 교차 기능팀(Cross-functional Team)에서 공동의 목표를 가지고 가설과 실험을 통해 신규 기능 개발을 하거나 기존 기능의 개선 업무를 수행하거나 기능팀(Functional Team)에서 개발자들의 생산성 향상을 위한 레거시 개선 및 개발 환경 개선을 위한 업무를 수행할 수 있다. 
-대부분의 IT기업에서 개발자는 한정적이고 하고 싶은 혹은 해야만 하는 일들은 많기 때문에 어떤 일을 우선적으로 해야 하는지에 대한 가치 판단 및 우선순위 설...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/14</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "개발문화">개발문화</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "생산성">생산성</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2021/06/23/%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%84%EB%AC%B4%EB%A6%AC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%A4%EB%A0%A5%EC%9D%B4-%EB%8A%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9D%B4%EC%9C%A0/" >
-                
-                    <span>당신이 아무리 공부해도 개발 실력이 늘지 않는 이유</span>
-            </a>
-            <div class="abstract-content">
-                당신이 아무리 공부해도 개발 실력이 늘지 않는 이유지식은 기술이 아니다백엔드 개발자 4년 차인 A 씨는 퇴근 후에 자기 개발을 위해 기술 도서를 꾸준히 읽는다. 최근에는 리팩토링이라는 책을 읽고 사내의 개발자들에게 자신이 공부한 것에 대해 발표도 했다. 하지만 아쉬운 점도 있다. 마음만 먹으면 언제든 리팩토링 할 수는 있지만 항상 바쁜 일정 때문에 리팩토링 할 시간이 없다. 사실 지금도 그럭저럭 잘 돌아가고 있는데 리팩토링을 한다고 새로운 비지니스 가치가 더해지는 것도 아니니 그 시간에 새로운 기능을 하나 더 만드는게 낫지 않...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/06/23</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2021/05/12/IT%EA%B8%B0%EC%97%85%EC%9D%98-6%EA%B0%80%EC%A7%80-%EB%AC%B8%ED%99%94%ED%8C%A8%ED%84%B4/" >
-                
-                    <span>IT기업의 6가지 문화패턴</span>
-            </a>
-            <div class="abstract-content">
-                최근 IT 기업에서 개발자들을 모시기 위한 경쟁이 치열해지고 있다. 개발자들이 회사를 선택할 때 보는 요소 중에 금전적인 부분도 중요한 요소 중의 하나일 수는 있겠지만 좋은 개발문화를 가지고 있는지도 개발자들에게 중요한 관심사 중의 하나이다. 좋은 개발 문화에서 일할 때 개발자로서의 높은 성장도 기대할 수 있다고 믿기 때문이다. 그렇기 때문에 회사들은 몸값 경쟁 이외에도 회사의 개발문화를 홍보하기 위한 노력도 많이 기울이고 있다.근데 좋은 개발문화라는 것은 무엇일까? 애자일 프로세스를 적용하고 있다든지, 코드 리뷰를 한다든지,...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/05/12</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "개발문화">개발문화</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2021/04/14/%ED%92%88%EC%A7%88%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/" >
-                
-                    <span>소프트웨어 품질이란 무엇일까?</span>
-            </a>
-            <div class="abstract-content">
-                오래전부터 개발자로서 품질에 대한 고민이 많았다. 나에게 좋은 품질이라고 한다면 버그가 없는 코드를 의미했고, 유지보수하기 쉬운 설계와 코드, 기획 의도가 잘 구현된 것을 의미했다. 나는 품질이 높은 코드를 만들고 싶었지만, 현실은 항상 녹록하지 않았다. 항상 시간에 쫓겨서 만들어야 했고 품질을 유지하기 위해서는 비개발자 뿐만 아니라 동료개발자도 설득해야만 했다. 나에겐 명확하게 보이는 것들이 많은 설득을 하거나 내 개인 시간을 할애하면서까지 품질을 유지해야 한다는 것이 이해가 되지 않았다.
-오늘은 이런 여러 고민을 해결하기 ...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/04/14</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
+
             <!-- profile -->
             
         </div>
@@ -533,6 +496,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AI-%EC%8B%9C%EB%8C%80%EC%9D%98-%EB%B6%88%EC%95%88-%EC%95%9E%EC%97%90%EC%84%9C"><span class="toc-number">1.</span> <span class="toc-text">AI 시대의 불안 앞에서</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%89%AC%EC%9B%8C%EC%A7%88%EC%88%98%EB%A1%9D-%EB%AC%B8%EC%A0%9C%EC%97%90%EC%84%9C-%EB%A9%80%EC%96%B4%EC%A7%84%EB%8B%A4"><span class="toc-number">2.</span> <span class="toc-text">만들기 쉬워질수록 문제에서 멀어진다</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AI%EB%8A%94-%EC%82%AC%EA%B3%A0%EB%A5%BC-%EC%A6%9D%ED%8F%AD%ED%95%9C%EB%8B%A4"><span class="toc-number">3.</span> <span class="toc-text">AI는 사고를 증폭한다</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EC%9D%98-%EB%B3%B8%EC%A7%88%EC%9D%80-%EC%97%AC%EC%A0%84%ED%9E%88-%EA%B0%99%EB%8B%A4"><span class="toc-number">4.</span> <span class="toc-text">소프트웨어의 본질은 여전히 같다</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EC%9D%98-%EB%B3%B8%EC%A7%88%EB%8F%84-%EB%B3%80%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94%EB%8B%A4"><span class="toc-number">5.</span> <span class="toc-text">소프트웨어 엔지니어의 본질도 변하지 않는다</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%B0%B8%EA%B3%A0%ED%95%9C-%EA%B8%80"><span class="toc-number">6.</span> <span class="toc-text">참고한 글</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -921,6 +902,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
