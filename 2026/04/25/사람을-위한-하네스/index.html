@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="소프트웨어 개발에 대한 생각과 소개">
-    <title>wonderland</title>
+    <title>사람을 위한 하네스 · wonderland</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -174,12 +176,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >wonderland</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">사람을 위한 하네스</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>wonderland</a>
 </header>
@@ -193,24 +206,73 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            사람을 위한 하네스
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "AI">AI</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "생각">생각</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "하네스">하네스</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "시스템">시스템</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2026/04/25</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -294,42 +356,155 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="AI를-위한-하네스-사람을-위한-하네스"><a href="#AI를-위한-하네스-사람을-위한-하네스" class="headerlink" title="AI를 위한 하네스, 사람을 위한 하네스"></a>AI를 위한 하네스, 사람을 위한 하네스</h2><p>AX 공유회에서 한 동료가 이런 말을 했다.</p>
+<blockquote>
+<p>“AI를 위한 하네스는 있는데, 왜 사람을 위한 하네스는 없을까?”</p>
+</blockquote>
+<p>이어진 말도 인상 깊었다. 인간도 에이전트 중 하나이고, Claude Code 같은 도구는 인간의 서브에이전트라고 볼 수 있다는 이야기였다. 들으면서 머릿속에서 “와, 그렇게도 볼 수도 있겠구나!” 하는 생각이 들었다. 그러면서 자연스럽게 다음 생각이 이어졌다. 그렇다면 사람을 위한 하네스란 정말 무엇일까.</p>
+<p>AI 에이전트는 모델 하나만으로 잘 작동하지 않는다. 아무리 좋은 모델이라도 그냥 던져놓으면 금방 한계가 드러난다. 이전 맥락을 잊고, 도구 호출에 실패하고, 엉뚱한 방향으로 가고, 결과를 검증하지 못한다. 그래서 모델 주변에는 일을 받쳐주는 여러 장치가 붙는다. 이 전체 실행 환경을 하네스라고 부른다.</p>
+<p><img src="/images/human-harness-01-runtime-shell.jpg" alt="AI 모델을 감싸는 실행 하네스" title="같은 모델도 하네스에 따라 다른 성능을 낸다"></p>
+<p>같은 모델이라도 어떤 하네스를 붙이느냐에 따라 성능이 크게 달라진다는 사실이 알려지면서, 최근에는 모델 자체보다 그 주변의 하네스를 어떻게 설계할지에 대한 관심이 빠르게 커지고 있다. 문제를 단순히 “모델이 멍청하다”로 끝내지 않고, “모델이 잘 작동할 환경을 만들어줬는가”로 다시 묻기 시작한 것이다.</p>
+<h2 id="사람-모델-탓에서-하네스-점검으로"><a href="#사람-모델-탓에서-하네스-점검으로" class="headerlink" title="사람(모델) 탓에서 하네스 점검으로"></a>사람(모델) 탓에서 하네스 점검으로</h2><p>그렇다면 사람은 어떨까. 사람도 목표를 받고, 맥락을 해석하고, 도구를 쓰고, 행동하고, 결과를 관찰하며 다음 행동을 고른다. 그런 의미에서 사람도 하나의 에이전트라고 볼 수 있다. 그런데 사람에게는 이상하게도 하네스보다 의지와 태도를 먼저 요구한다.</p>
+<ul>
+<li>일을 까먹으면 <strong>꼼꼼하지 못하다</strong>.</li>
+<li>미루면 <strong>의지가 약하다</strong>.</li>
+<li>집중하지 못하면 <strong>태도의 문제</strong>다.</li>
+<li>실수하면 <strong>책임감이 부족하다</strong>.</li>
+</ul>
+<p>물론 개인의 의지와 태도가 중요하지 않다는 말은 아니다. 다만 AI가 원하는 결과를 내지 못할 때 우리는 모델 탓에 머물지 않는다. 어떻게 하면 그 모델이 일을 더 잘하게 만들지를 먼저 고민한다. 사람에게도 같은 태도를 적용할 수 있다. 누군가 잘 해내지 못할 때, 그 사람의 의지나 태도를 탓하기 전에 어떻게 하면 그 사람이 더 잘 해낼 수 있게 도울지를 먼저 묻는 것이다.</p>
+<p><img src="/images/human-harness-02-missing-components-v2.png" alt="비난 대신 비어 있는 하네스 구성요소를 바라보기" title="비난 대신 비어 있는 하네스 구성요소를 바라보기"></p>
+<p>모델을 당장 바꾸기 어렵다면 하네스를 바꾼다. 사람도 마찬가지다. 사람의 성격이나 의지를 바꾸는 일은 느리고 어렵다. 하지만 사람을 둘러싼 구조는 비교적 빠르게 바꿀 수 있다.</p>
+<h2 id="사람을-위한-하네스의-구성요소"><a href="#사람을-위한-하네스의-구성요소" class="headerlink" title="사람을 위한 하네스의 구성요소"></a>사람을 위한 하네스의 구성요소</h2><p>사람을 위한 하네스란 무엇일까. 정의를 단정적으로 먼저 내리기보다, 이미 잘 정리된 AI 하네스의 구조를 빌려와 사람에게 하나씩 비추어보고 싶었다. <a target="_blank" rel="noopener" href="https://x.com/akshay_pachaar/status/2041146899319971922">Akshay Pachaar이 AI 에이전트 하네스를 12가지 구성요소로 정리해둔 글</a>이 좋은 출발점이었다. 오케스트레이션 루프, 도구, 메모리, 컨텍스트 관리, 프롬프트 구성, 출력 파싱, 상태 관리, 오류 처리, 가드레일과 안전, 검증 루프, 하위 에이전트 오케스트레이션, 도구 범위 전략이다. 이 12가지를 사람에게 하나씩 옮겨보았다. 그러자 사람을 위한 하네스가 막연한 생산성 이야기가 아니라 꽤 구체적인 모양을 갖추기 시작했다.</p>
+<p>원글의 도식은 이 12요소를 LLM을 중심으로 세 겹의 동심원으로 정리한다. 가장 안쪽 런타임(Runtime) 층은 모델이 매 턴마다 굴리는 실행 사이클이고, 그 바깥 기능(Capabilities) 층은 모델이 가진 정보와 외부 자원을 다루는 영역이며, 가장 바깥 안전과 확장(Safety &amp; Scale) 층은 그 둘이 무너지지 않게 받쳐주는 신뢰성 영역이다. 이 세 겹을 사람에게 그대로 옮겨보면 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>층</th>
+<th>AI 하네스 구성요소</th>
+<th>사람을 위한 하네스</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>런타임 (Runtime)</strong></td>
+<td>오케스트레이션 루프</td>
+<td>하루의 사이클 (계획 → 실행 → 기록 → 다음)</td>
+</tr>
+<tr>
+<td></td>
+<td>프롬프트 구성</td>
+<td>작고 분명한 다음 행동, 입력과 기대 결과의 명시</td>
+</tr>
+<tr>
+<td></td>
+<td>출력 파싱</td>
+<td>회의록의 결정&#x2F;액션 아이템, 보고서의 한 줄 요약</td>
+</tr>
+<tr>
+<td></td>
+<td>오류 처리</td>
+<td>회고, 재발 방지 기록, 되돌릴 수 있는 작업 단위</td>
+</tr>
+<tr>
+<td><strong>기능 (Capabilities)</strong></td>
+<td>도구</td>
+<td>캘린더, 할 일 앱, 메모 앱, AI 어시스턴트</td>
+</tr>
+<tr>
+<td></td>
+<td>메모리</td>
+<td>작업 일지, 결정 기록, 위키&#x2F;노트</td>
+</tr>
+<tr>
+<td></td>
+<td>컨텍스트 관리</td>
+<td>작업 시작 전 짧은 브리프, 마지막에 남긴 진행 메모</td>
+</tr>
+<tr>
+<td></td>
+<td>상태 관리</td>
+<td>할 일 앱의 오늘&#x2F;예정 목록, 칸반 보드, 이슈 트래커</td>
+</tr>
+<tr>
+<td><strong>안전과 확장 (Safety &amp; Scale)</strong></td>
+<td>가드레일과 안전</td>
+<td>중요한 결정 전 체크리스트, 더블체크 절차</td>
+</tr>
+<tr>
+<td></td>
+<td>검증 루프</td>
+<td>셀프 리뷰, 동료 리뷰, 페어 작업, 모니터링 알림</td>
+</tr>
+<tr>
+<td></td>
+<td>하위 에이전트 오케스트레이션</td>
+<td>동료·AI·자동화 스크립트에게 일 맡기기</td>
+</tr>
+<tr>
+<td></td>
+<td>도구 범위 전략</td>
+<td>집중 시간엔 알림 차단, 시간대별 도구 분리</td>
+</tr>
+</tbody></table>
+<p>표를 펼쳐 놓고 보면 사람을 위한 하네스가 막연한 다짐이 아니라 꽤 구체적인 설계 대상이라는 게 보이기 시작한다. 나는 최근에 오픈클로를 내 삶에서 다양한 형태로 활용하고 있었는데 이 구성요소에 기반해서 AI와 함께 나를 위한 하네스 중에 어떤 부분이 잘 되어 있고 어떤 부분이 부족한지 알 수 있었다. 자연스럽게 내 하네스를 지속적으로 어떻게 평가하고 개선할 것인지에 대한 고민도 함께 하게 되었다.</p>
+<h2 id="사람을-바꾸기-전에-조건을-설계하라"><a href="#사람을-바꾸기-전에-조건을-설계하라" class="headerlink" title="사람을 바꾸기 전에 조건을 설계하라"></a>사람을 바꾸기 전에 조건을 설계하라</h2><p>우린 직접 AI의 모델을 변화시키기는 어렵다는 것을 잘 알고 있다. 그렇기에 하네스라는 환경을 통해서 AI가 일을 더 잘할 수 있도록 노력한다. 사람도 마찬가지다. 나의 능력을 발전시키기 전에, 나의 능력을 잘 발전시킬 수 있는 하네스는 무엇인지를 고민하는 태도가 중요하다고 생각한다.</p>
+<blockquote>
+<p>좋은 하네스는 사람을 통제하지 않는다. 사람이 잘 작동할 조건을 만들어줄 뿐이다.</p>
+</blockquote>
+<p>좋은 하네스는 모델을 지나치게 통제하지 않고, 모델이 자율적으로 행동하면서도 목표를 잃지 않도록 해준다. 인간을 위한 하네스도 통제가 아니라, 인간의 장점과 자율성을 보존하면서 목표를 잘 달성할 수 있도록 돕는 형태가 되어야 할 것이다.</p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="previous">
+          
+              <div class="prevSlogan">Previous Post</div>
+              <a href= "/2026/04/17/AI-%EC%8B%9C%EB%8C%80-%EB%8D%94-%EC%84%A0%EB%AA%85%ED%95%B4%EC%A7%84-%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4-%EA%B0%9C%EB%B0%9C%EC%9D%98-%EB%B3%B8%EC%A7%88/" title= AI 시대, 더 선명해진 소프트웨어 개발의 본질 >
+                  <div class="prevTitle">AI 시대, 더 선명해진 소프트웨어 개발의 본질</div>
+              </a>
+          
+        </li>
+        <li class="next">
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = "https://wonderer80.github.io/2026/04/25/%EC%82%AC%EB%9E%8C%EC%9D%84-%EC%9C%84%ED%95%9C-%ED%95%98%EB%84%A4%EC%8A%A4/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "사람을 위한 하네스"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://wonderland-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
     
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
-        <article class="index-post">
-            <a class="abstract-title" href = "/2022/02/09/%EC%9A%B0%EB%A6%B0-%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%9E%98%ED%95%98%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C/" >
-                
-                    <span>우린 코드리뷰 잘하고 있을까?</span>
-            </a>
-            <div class="abstract-content">
-                코드 리뷰 남들도 다 하더라코드 리뷰 라는 말이 이제는 개발자라면 누구나 익숙한 관용어가 되었지만, 이 용어가 생소했던 시절이 생각보다 그리 오래 전은 아니다. 과거에는 코드는 작성한 개인의 소유물 처럼 여겨졌고 그렇기에 코드에 대한 비판은 나 자신의 비판으로 여겼기에 누군가가 나의 코드를 보는 것 자체만으로 거부감이 있었던 시기도 있었다. 하지만 최근에는 오히려 코드 리뷰를 하지 않는 조직은 시대에서 뒤쳐지는 것처럼 느껴지는 정도의 분위기가 된 것 같다.
-반면 최근에 여러 개발자들과 이야기를 나눠보면 본인이 속한 조직에서 코...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/02/09</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "IT생각">IT생각</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "개발문화">개발문화</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "코드리뷰">코드리뷰</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
+
             <!-- profile -->
             
         </div>
@@ -394,6 +569,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AI%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%95%98%EB%84%A4%EC%8A%A4-%EC%82%AC%EB%9E%8C%EC%9D%84-%EC%9C%84%ED%95%9C-%ED%95%98%EB%84%A4%EC%8A%A4"><span class="toc-number">1.</span> <span class="toc-text">AI를 위한 하네스, 사람을 위한 하네스</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%82%AC%EB%9E%8C-%EB%AA%A8%EB%8D%B8-%ED%83%93%EC%97%90%EC%84%9C-%ED%95%98%EB%84%A4%EC%8A%A4-%EC%A0%90%EA%B2%80%EC%9C%BC%EB%A1%9C"><span class="toc-number">2.</span> <span class="toc-text">사람(모델) 탓에서 하네스 점검으로</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%82%AC%EB%9E%8C%EC%9D%84-%EC%9C%84%ED%95%9C-%ED%95%98%EB%84%A4%EC%8A%A4%EC%9D%98-%EA%B5%AC%EC%84%B1%EC%9A%94%EC%86%8C"><span class="toc-number">3.</span> <span class="toc-text">사람을 위한 하네스의 구성요소</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%82%AC%EB%9E%8C%EC%9D%84-%EB%B0%94%EA%BE%B8%EA%B8%B0-%EC%A0%84%EC%97%90-%EC%A1%B0%EA%B1%B4%EC%9D%84-%EC%84%A4%EA%B3%84%ED%95%98%EB%9D%BC"><span class="toc-number">4.</span> <span class="toc-text">사람을 바꾸기 전에 조건을 설계하라</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -808,6 +1001,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
